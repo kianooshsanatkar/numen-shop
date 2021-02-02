@@ -2,20 +2,25 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { connect } from "react-redux";
+
 import { mapDispatchToProps } from "./redux/cart/cart-reducer";
 import Header from "./components/header/header.component";
 
 class App extends Component {
 
+  state={
+    is_hidden: false
+  }
+
   componentDidMount(){
-    console.log('app component did mount');
-    this.props.setCartItems({
+    this.props.setCartItems([{
       item1: "first item",
-    });
+    }]);
   }
 
   render() {
-    console.log("this is app");
+    console.log("this is app", this.state.is_hidden);
+
     return (
       <div className="App">
         <Header></Header>

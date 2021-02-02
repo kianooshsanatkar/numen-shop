@@ -1,0 +1,39 @@
+header nav{
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+}
+.header-border{
+    position: absolute;
+    top: 68px;
+    left:5vw;
+    right: 5vw;
+    border-bottom: 2px solid black;
+}
+
+.numen-logo{
+    height: 50px;
+    top:10px;
+    position: absolute;
+    left:50%;
+    margin-left: -60px;
+}
+
+.menu-button{
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 5vw;
+}
+
+.cart-button{
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 5vw;
+    z-index: 100;
+}

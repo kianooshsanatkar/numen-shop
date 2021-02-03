@@ -33,7 +33,7 @@
 
     .cart-container {
         width: 100vw;
-        right:-100vw;
+        right:-101vw;
     }
 }
 
@@ -41,6 +41,6 @@
 
     .cart-container {
         width: 35vw;
-        right: -35vw;
+        right: -36vw;
     }
 }

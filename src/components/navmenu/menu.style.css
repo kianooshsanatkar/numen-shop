@@ -1,0 +1,42 @@
+
+.menu-container {
+    padding-top: 100px;
+    height: 100vh;
+    background-color: white;
+    border-right: 2px solid black;
+    z-index: 9;
+    position: fixed;
+    top:0;
+    transition: left .5s ease-in-out;
+}
+
+.close-button{
+    position: absolute;
+    top: 20px;
+    left:30px;
+    cursor: pointer;
+}
+
+.border-line{
+    position: absolute;
+    width: 90%;
+    top:68px;
+    border-bottom: 2px solid black;
+    left:5%;
+}
+
+@media(max-width:979px){
+
+    .menu-container {
+        width: 100vw;
+        left:-101vw;
+    }
+}
+
+@media(min-width:980px) {
+
+    .menu-container {
+        width: 35vw;
+        left: -36vw;
+    }
+}

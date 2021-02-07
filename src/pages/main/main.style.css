@@ -1,0 +1,28 @@
+.main-cover{
+    height: 100vh;
+    padding-top: 70px;
+    overflow: hidden;
+}
+.main-bg-cover{
+    max-height: 100%;
+}
+.main-title{
+    direction: rtl;
+}
+
+@media(max-width:640px){
+    
+    .main-title{
+        padding: 10vh 0;
+        text-align: center;
+    }
+
+}
+@media(min-width:641px){
+    
+    .main-title{
+        padding: 35vh 0;
+        height: 100vh;
+    }
+
+}

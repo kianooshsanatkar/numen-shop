@@ -1,7 +1,15 @@
-.App {
-  padding-top: 70px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  direction: rtl;
 }
 
-ul{
+.App {}
+
+ul {
   list-style: none;
 }

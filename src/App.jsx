@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import { mapDispatchToProps } from "./redux/cart/cart-reducer";
 import Header from "./components/header/header.component";
+import Main from "./pages/main/main.page";
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header></Header>
+        <Main></Main>
       </div>
     );
   }

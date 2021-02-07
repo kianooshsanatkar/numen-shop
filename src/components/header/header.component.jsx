@@ -22,9 +22,11 @@ class Header extends Component {
           <div className="menu-button">
             <Hamburger
               direction="right"
-              toggle={()=>this.setState((prevState, prevProps) => ({
-                menuVisibility: !prevState.menuVisibility,
-              }))}
+              toggle={() =>
+                this.setState((prevState, prevProps) => ({
+                  menuVisibility: !prevState.menuVisibility,
+                }))
+              }
               toggled={this.state.menuVisibility}
             ></Hamburger>
           </div>
@@ -40,6 +42,17 @@ class Header extends Component {
           </div>
           <div className="header-border"></div>
         </nav>
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "fixed",
+            cursor: "pointer",
+            backgroundColor: "rgba(0,0,0,.1)",
+            display: this.state.menuVisibility ? "block" : "none",
+          }}
+          onClick={() => this.setState({ menuVisibility: false })}
+        ></div>
         <Menu
           menuVisibility={this.state.menuVisibility}
           closeMenu={() => this.setState({ menuVisibility: false })}

@@ -13,7 +13,7 @@ export default function ProductItem(props) {
           <img src={link_path + images[0] + suffix} alt={props.product.title} />
         ) : null}
         <div className="product-item-title">
-          <Typography variant="h4" className="yekan-text">
+          <Typography variant="h5" className="yekan-text">
             {props.product.title}
           </Typography>
         </div>

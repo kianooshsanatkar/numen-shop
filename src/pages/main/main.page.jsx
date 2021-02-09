@@ -3,8 +3,8 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import "./main.style.css";
-import BgImage from '../../resource/images/IMG_7129.JPG';
-import ProductSlider from "../../components/product/product-container.component";
+import BgImage from '../../resource/images/Soap-01.jpg';
+import ProductContainer from "../../components/product/product-container.component";
 import HeightSpace from '../../components/space/space.component';
 
 class Main extends Component{
@@ -24,7 +24,7 @@ class Main extends Component{
                 <HeightSpace />
                 <Grid container>
                     <Grid item xs={12}>
-                        <ProductSlider />
+                        <ProductContainer labelId="1" />
                     </Grid>
                 </Grid>
                 <div className="scroll-down-button">

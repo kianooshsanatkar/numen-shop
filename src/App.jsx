@@ -1,22 +1,24 @@
 import React, { Component } from "react";
-import "./App.css";
-
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { mapDispatchToProps } from "./redux/cart/cart-reducer";
 import Header from "./components/header/header.component";
+import Footer from "./components/footer/footer.component";
 import Main from "./pages/main/main.page";
+import "./App.css";
 
 class App extends Component {
+  state = {
+    is_hidden: false,
+  };
 
-  state={
-    is_hidden: false
-  }
-
-  componentDidMount(){
-    this.props.setCartItems([{
-      item1: "first item",
-    }]);
+  componentDidMount() {
+    this.props.setCartItems([
+      {
+        item1: "first item",
+      },
+    ]);
   }
 
   render() {
@@ -25,7 +27,19 @@ class App extends Component {
     return (
       <div className="App">
         <Header></Header>
-        <Main></Main>
+        <Router>
+          <div>
+            <Switch>
+              <Route path="/products">
+                {/* <Users /> */}
+              </Route>
+              <Route path="/">
+                <Main></Main>
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+        <Footer></Footer>
       </div>
     );
   }

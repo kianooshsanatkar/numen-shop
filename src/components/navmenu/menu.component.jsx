@@ -15,7 +15,7 @@ export default class Menu extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          let labels = data.sort((x, y) => x.parent - y.parent);
+          let labels = data.sort((x, y) => x.parent - y.parent).filter(x=> x.is_menu_label===true);
           let root_labels = [];
           if (labels) {
             root_labels = labels.filter((label) => {

@@ -1,8 +1,10 @@
-import React from 'react'
+import React from "react";
 
-
-export default function MenuItem (props) {
-    return <div>
-        {props.label.uid}- {props.label.title}
+export default function MenuItem(props) {
+  return (
+    <div>
+      <h3>{props.label.title}</h3>
+      <hr />
     </div>
+  );
 }

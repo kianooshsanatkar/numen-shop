@@ -10,6 +10,13 @@
     direction: rtl;
 }
 
+.scroll-down-button{
+    position: absolute;
+    bottom: 50px;
+    left:50%;
+    margin-left: -10px;
+}
+
 @media(max-width:640px){
     
     .main-title{
@@ -21,7 +28,7 @@
 @media(min-width:641px){
     
     .main-title{
-        padding: 35vh 0;
+        padding-top: 45vh;
         height: 100vh;
     }
 

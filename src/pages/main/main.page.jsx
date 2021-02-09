@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import "./main.style.css";
 import BgImage from '../../resource/images/IMG_7129.JPG';
-import ProductSlider from "../../components/product-slider/product-slider.component";
+import ProductSlider from "../../components/product/product-container.component";
 import HeightSpace from '../../components/space/space.component';
 
 class Main extends Component{

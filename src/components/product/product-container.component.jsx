@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import React, { Component } from "react";
 
 import ProductItem from "./product-item.component";
-import './product-slider.style.css';
+import './product-container.style.css';
 
 class ProductSlider extends Component {
   state = {

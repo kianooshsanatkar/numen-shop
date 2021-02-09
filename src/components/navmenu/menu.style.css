@@ -8,6 +8,7 @@
     position: fixed;
     top:0;
     transition: left .5s ease-in-out;
+    z-index: 40;
 }
 
 .close-button{

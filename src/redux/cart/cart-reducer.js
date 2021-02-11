@@ -22,7 +22,7 @@ export function setCartVisibilityAction(visible){
 }
 
 export default function cartReducer(currentState = INITIAL_STATE, action) {
-    console.log("this is cart Reducer, currentState: ", currentState, " action: ", action);
+    // console.log("this is cart Reducer, currentState: ", currentState, " action: ", action);
     switch (action.type) {
         case cartActions.UPDATE_CART_ITEM:
             return {

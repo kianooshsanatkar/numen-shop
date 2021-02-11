@@ -10,6 +10,10 @@
     transition: left .5s ease-in-out;
     z-index: 40;
 }
+.menu-container .menu-item{
+    text-decoration: none;
+    color:inherit;
+}
 
 .close-button{
     position: absolute;

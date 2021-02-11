@@ -15,7 +15,9 @@ export default class Menu extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          let labels = data.sort((x, y) => x.parent - y.parent).filter(x=> x.is_menu_label===true);
+          let labels = data
+            .sort((x, y) => x.parent - y.parent)
+            .filter((x) => x.is_menu_label === true);
           let root_labels = [];
           if (labels) {
             root_labels = labels.filter((label) => {
@@ -45,7 +47,7 @@ export default class Menu extends Component {
   append_category(label) {
     return (
       <li key={label.uid}>
-        <MenuItem label={label} />
+        <MenuItem label={label} closeMenu={this.props.closeMenu} />
         {label.child.length ? (
           <ul>{label.child.map((l) => this.append_category(l))}</ul>
         ) : null}
@@ -63,7 +65,6 @@ export default class Menu extends Component {
           <CloseOutlinedIcon fontSize="large"></CloseOutlinedIcon>
         </div>
         <div className="border-line"></div>
-
         <ul>{this.state.labels.map((label) => this.append_category(label))}</ul>
       </aside>
     );

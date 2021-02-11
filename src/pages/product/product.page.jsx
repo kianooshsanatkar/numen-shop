@@ -85,6 +85,7 @@ class ProductPage extends Component {
                     <Grid key={image} item xs={4} md={3}>
                       <img
                         className="product-images"
+                        onClick={()=>(this.setState({selectedImage:image}))}
                         src={this.getImagePath(image)}
                         alt={this.state.product.title}
                       />

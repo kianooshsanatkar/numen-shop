@@ -8,6 +8,7 @@ import Footer from "./components/footer/footer.component";
 import Main from "./pages/main/main.page";
 import "./App.css";
 import Products from "./pages/products/products.page";
+import ProductPage from "./pages/product/product.page";
 
 class App extends Component {
   state = {
@@ -31,6 +32,9 @@ class App extends Component {
           <Header></Header>
           <div>
             <Switch>
+              <Route exact path="/product/:productId">
+                <ProductPage></ProductPage>
+              </Route>
               <Route exact path="/products/:labelId">
                 <Products />
               </Route>

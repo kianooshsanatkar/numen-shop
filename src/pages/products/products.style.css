@@ -1,0 +1,16 @@
+.products-cover-image{
+  background-image: url("../../resource/images/Soap-03.jpg");
+  min-height: 35vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.products-title{
+    text-align: center;
+    margin: 2em 0;
+}
+.products-description{
+    margin: 3em 0;
+}

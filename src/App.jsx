@@ -7,6 +7,7 @@ import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
 import Main from "./pages/main/main.page";
 import "./App.css";
+import Products from "./pages/products/products.page";
 
 class App extends Component {
   state = {
@@ -22,16 +23,16 @@ class App extends Component {
   }
 
   render() {
-    console.log("this is app", this.state.is_hidden);
+    // console.log("this is app", this.state.is_hidden);
 
     return (
       <div className="App">
-        <Header></Header>
         <Router>
+          <Header></Header>
           <div>
             <Switch>
-              <Route path="/products">
-                {/* <Users /> */}
+              <Route exact path="/products/:labelId">
+                <Products />
               </Route>
               <Route path="/">
                 <Main></Main>

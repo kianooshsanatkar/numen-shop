@@ -6,21 +6,35 @@ import "./product-container.style.css";
 
 class ProductContainer extends Component {
   state = {
+    labelId: null,
     products: [],
   };
 
-  componentDidMount() {
-    if (this.props.labelId) {
-      fetch("http://127.0.0.1:5000/api/label/products/" + this.props.labelId)
+  fetchProducts(){
+    this.setState({ labelId: this.props.labelId });
+    fetch("http://127.0.0.1:5000/api/label/products/" + this.props.labelId)
         .then((response) => response.json())
         .then((data) => {
           this.setState({ products: data });
         });
+  }
+
+  componentDidMount() {
+    if (this.props.labelId) {
+      this.fetchProducts()
     }
   }
 
+  componentDidUpdate(){
+    if(this.state.labelId !== this.props.labelId){
+      console.log("in if");
+      this.fetchProducts()
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    console.log(this.state.products);
     return (
       <Grid container spacing={6}>
         {this.state.products.map((product) => (

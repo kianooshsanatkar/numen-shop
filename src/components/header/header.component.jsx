@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom';
 
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Spiral as Hamburger } from "hamburger-react";
@@ -30,7 +31,9 @@ class Header extends Component {
               toggled={this.state.menuVisibility}
             ></Hamburger>
           </div>
-          <img src={Logo} alt="Numen Flame" className="numen-logo" />
+          <Link to="/">
+            <img src={Logo} alt="Numen Flame" className="numen-logo" />
+          </Link>
           <div className="cart-button">
             <ShoppingCartOutlinedIcon
               fontSize="large"

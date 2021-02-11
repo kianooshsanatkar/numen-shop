@@ -17,6 +17,9 @@ h6,
 p {
   direction: rtl;
 }
+h1{
+  font-size: 3em;
+}
 .yekan-text{
   font-family: BYekan!important;
 }

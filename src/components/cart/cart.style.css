@@ -1,6 +1,4 @@
 .cart-container {
-    padding-top: 80px;
-    padding-bottom: 60px;
     background-color: white;
     border-left: 2px solid black;
     position: fixed;
@@ -9,6 +7,24 @@
     transition: right .5s ease-in-out;
     z-index: 40;
     overflow: auto;
+}
+.cart-header-section{
+    height:70px;
+}
+.cart-main-section{
+    position: relative;
+    padding-bottom: 100px;
+}
+.cart-inner-container{
+    position: relative;
+    min-height: 100vh;
+}
+.cart-bottom-section{
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    font-family: 'BYekan';
 }
 
 .close-cart-button {
@@ -38,10 +54,7 @@
     text-align: center;
 }
 .total-price-container{
-    position: absolute;
     text-align: center;
-    bottom: 20px;
-    font-family: 'BYekan';
     border-top: solid 2px black;
 }
 

@@ -25,42 +25,53 @@ class Cart extends Component {
         className="cart-container"
         style={this.props.cartVisibility ? { right: 0 } : null}
       >
-        <div className="close-cart-button">
-          <CloseOutlinedIcon
-            onClick={() => {
-              this.props.setCartVisibility();
-            }}
-            fontSize="large"
-          ></CloseOutlinedIcon>
+        <div className="cart-inner-container">
+          <section className="cart-header-section">
+            <div className="close-cart-button">
+              <CloseOutlinedIcon
+                onClick={() => {
+                  this.props.setCartVisibility();
+                }}
+                fontSize="large"
+              ></CloseOutlinedIcon>
+            </div>
+            <div className="cart-logo">
+              <ShoppingCartOutlinedIcon
+                color="disabled"
+                fontSize="large"
+              ></ShoppingCartOutlinedIcon>
+            </div>
+            <div className="border-line"></div>
+          </section>
+          <section className="cart-main-section">
+            <ul className="cart-items-container">
+              {Array.isArray(this.props.cartItems)
+                ? this.props.cartItems.map((item) => (
+                    <li key={item.uid}>
+                      <CartItem product={item} />
+                    </li>
+                  ))
+                : null}
+            </ul>
+          </section>
+          <section className="cart-bottom-section">
+            {Array.isArray(this.props.cartItems) &&
+            this.props.cartItems.length > 0 ? (
+              <Grid
+                className="total-price-container"
+                container
+                justify="center"
+              >
+                <Grid item xs={8}>
+                  <h2>{this.calculateTotalPrice()}</h2>
+                </Grid>
+                <Grid item xs={4}>
+                  <h3>جمع کل</h3>
+                </Grid>
+              </Grid>
+            ) : null}
+          </section>
         </div>
-        <div className="cart-logo">
-          <ShoppingCartOutlinedIcon
-            color="disabled"
-            fontSize="large"
-          ></ShoppingCartOutlinedIcon>
-        </div>
-        <div className="border-line"></div>
-
-        <ul className="cart-items-container">
-          {Array.isArray(this.props.cartItems)
-            ? this.props.cartItems.map((item) => (
-                <li key={item.uid}>
-                  <CartItem product={item} />
-                </li>
-              ))
-            : null}
-        </ul>
-        {Array.isArray(this.props.cartItems) &&
-        this.props.cartItems.length > 0 ? (
-          <Grid className="total-price-container" container justify="center">
-            <Grid item xs={8}>
-              <h2>{this.calculateTotalPrice()}</h2>
-            </Grid>
-            <Grid item xs={4}>
-              <h3>جمع کل</h3>
-            </Grid>
-          </Grid>
-        ) : null}
       </aside>
     );
   }

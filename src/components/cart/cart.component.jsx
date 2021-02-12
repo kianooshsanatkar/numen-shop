@@ -49,7 +49,7 @@ class Cart extends Component {
               {Array.isArray(this.props.cartItems)
                 ? this.props.cartItems.map((item) => (
                     <li key={item.uid}>
-                      <CartItem product={item} />
+                      <CartItem product={item} quantity={item.quantity} />
                     </li>
                   ))
                 : null}

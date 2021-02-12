@@ -22,9 +22,10 @@
 .cart-bottom-section{
     position: absolute;
     bottom: 20px;
-    right: 0;
-    left: 0;
+    right: 10px;
+    left: 10px;
     font-family: 'BYekan';
+    padding: 15px;
 }
 
 .close-cart-button {
@@ -52,10 +53,6 @@
 }
 .cart-item div, .cart-item h3{
     text-align: center;
-}
-.total-price-container{
-    text-align: center;
-    border-top: solid 2px black;
 }
 
 @media(max-width:959px){

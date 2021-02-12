@@ -10,6 +10,7 @@ import {
 } from "../../redux/cart/cart-reducer";
 import CartItem from "./cart-item.component";
 import "./cart.style.css";
+import { Button } from "@material-ui/core";
 
 class Cart extends Component {
   calculateTotalPrice = () => {
@@ -62,11 +63,16 @@ class Cart extends Component {
                 container
                 justify="center"
               >
-                <Grid item xs={8}>
-                  <h2>{this.calculateTotalPrice()}</h2>
-                </Grid>
-                <Grid item xs={4}>
-                  <h3>جمع کل</h3>
+                <Grid item xs={12}>
+                  <Button
+                    size="large"
+                    fullWidth
+                    color="primary"
+                    variant="contained"
+                    style={{fontSize:"1.5em"}}
+                  >
+                    {this.calculateTotalPrice()}
+                  </Button>
                 </Grid>
               </Grid>
             ) : null}

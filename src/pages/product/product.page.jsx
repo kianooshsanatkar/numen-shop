@@ -17,6 +17,12 @@ import NoImage from "../../resource/images/no-image-available.jpg";
 
 import HeightSpace from "../../components/space/space.component";
 import "./product.style.css";
+import { connect } from "react-redux";
+
+import {
+  mapStateToProps,
+  mapDispatchToProps,
+} from "../../redux/cart/cart-reducer";
 
 class ProductPage extends Component {
   state = {
@@ -29,7 +35,6 @@ class ProductPage extends Component {
     fetch("http://127.0.0.1:5000/api/product/" + productId)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.images ? data.images.split(",") : [NoImage]);
         this.setState({
           product: data,
           images: data.images.split(","),
@@ -50,7 +55,9 @@ class ProductPage extends Component {
     for (let [key, val] of Object.entries(properties)) {
       rows.push(
         <TableRow key={key}>
-          <TableCell align="right"><strong>{key}:</strong></TableCell>
+          <TableCell align="right">
+            <strong>{key}:</strong>
+          </TableCell>
           <TableCell align="right">{val}</TableCell>
         </TableRow>
       );
@@ -59,8 +66,6 @@ class ProductPage extends Component {
   }
 
   render() {
-    console.log("***************************");
-    console.log(this.state.product);
     return (
       <main>
         <HeightSpace></HeightSpace>
@@ -85,7 +90,7 @@ class ProductPage extends Component {
                     <Grid key={image} item xs={4} md={3}>
                       <img
                         className="product-images"
-                        onClick={()=>(this.setState({selectedImage:image}))}
+                        onClick={() => this.setState({ selectedImage: image })}
                         src={this.getImagePath(image)}
                         alt={this.state.product.title}
                       />
@@ -136,6 +141,16 @@ class ProductPage extends Component {
                   color="secondary"
                   fullWidth
                   style={{ top: "50%", marginTop: "-1em" }}
+                  onClick={() => {
+                    this.props.setCartVisibility(true);
+                    this.props.setCartItems({
+                      uid: this.state.product.uid,
+                      title: this.state.product.title,
+                      price: this.state.product.price,
+                      quantity:1,
+                      image: this.state.selectedImage
+                    });
+                  }}
                 >
                   خرید
                 </Button>
@@ -148,4 +163,4 @@ class ProductPage extends Component {
   }
 }
 
-export default withRouter(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductPage));

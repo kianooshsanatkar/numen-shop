@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
-    cartItems: null,
-    setCartVisibility: false
+    cartItems: [],
+    cartVisibility: false
 }
 
 export const cartActions = {
@@ -14,24 +14,32 @@ export function setCartItemsAction(items) {
         payload: items
     }
 }
-export function setCartVisibilityAction(visible){
-    return{
+export function setCartVisibilityAction(visible) {
+    return {
         type: cartActions.SHOW_CART,
-        payload: null
+        payload: visible
     }
 }
 
 export default function cartReducer(currentState = INITIAL_STATE, action) {
-    // console.log("this is cart Reducer, currentState: ", currentState, " action: ", action);
     switch (action.type) {
         case cartActions.UPDATE_CART_ITEM:
+            let found = currentState.cartItems.find(x => x.uid === action.payload.uid);
+            if (found) {
+                found.quantity += 1;
+                return {
+                    ...currentState,
+                    cartItems: [...currentState.cartItems]
+                }
+            }
             return {
                 ...currentState,
-                cartItems: action.payload
+                cartItems: currentState.cartItems.concat(action.payload)
             };
         case cartActions.SHOW_CART:
-            return{
-                cartVisibility: !currentState.cartVisibility 
+            return {
+                ...currentState,
+                cartVisibility: action.payload === null || action.payload === undefined ? !currentState.cartVisibility : action.payload
             }
         default:
             return currentState;
@@ -49,8 +57,9 @@ export const mapDispatchToProps = dispatch => {
 
 // state is rootReducer object
 export const mapStateToProps = state => {
-    return { 
+    // console.log(state);
+    return {
         cartItems: state.cart.cartItems,
         cartVisibility: state.cart.cartVisibility
-     };
+    };
 }

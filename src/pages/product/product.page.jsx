@@ -140,7 +140,7 @@ class ProductPage extends Component {
                   size="large"
                   color="secondary"
                   fullWidth
-                  style={{ top: "50%", marginTop: "-1em" }}
+                  style={{ top: "50%", marginTop: "-1em", fontSize:"1.5em" }}
                   onClick={() => {
                     this.props.setCartVisibility(true);
                     this.props.setCartItems({
@@ -152,7 +152,7 @@ class ProductPage extends Component {
                     });
                   }}
                 >
-                  خرید
+                  {this.state.product.price}
                 </Button>
               </Grid>
             </Grid>

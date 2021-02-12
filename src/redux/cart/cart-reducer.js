@@ -5,15 +5,24 @@ const INITIAL_STATE = {
 
 export const cartActions = {
     UPDATE_CART_ITEM: "UPDATE_CART",
-    SHOW_CART: "SHOW_CART"
+    SHOW_CART: "SHOW_CART",
+    REMOVE_CART_ITEM: "REMOVE_CART_ITEM"
 }
 
-export function setCartItemsAction(items) {
+export function setCartItemsAction(item) {
     return {
         type: cartActions.UPDATE_CART_ITEM,
-        payload: items
+        payload: item
     }
 }
+
+export function removeCartItemAction(uid) {
+    return {
+        type: cartActions.REMOVE_CART_ITEM,
+        payload: uid
+    }
+}
+
 export function setCartVisibilityAction(visible) {
     return {
         type: cartActions.SHOW_CART,
@@ -23,7 +32,7 @@ export function setCartVisibilityAction(visible) {
 
 export default function cartReducer(currentState = INITIAL_STATE, action) {
     switch (action.type) {
-        case cartActions.UPDATE_CART_ITEM:
+        case cartActions.UPDATE_CART_ITEM: {
             let found = currentState.cartItems.find(x => x.uid === action.payload.uid);
             if (found) {
                 found.quantity += 1;
@@ -36,6 +45,18 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
                 ...currentState,
                 cartItems: currentState.cartItems.concat(action.payload)
             };
+        }
+        case cartActions.REMOVE_CART_ITEM: {
+            let foundIndex = currentState.cartItems.findIndex(x => x.uid === action.payload);
+            if (foundIndex >= 0) {
+                currentState.cartItems.splice(foundIndex, 1);
+                return {
+                    ...currentState,
+                    cartItems: [...currentState.cartItems]
+                }
+            }
+            return currentState;
+        }
         case cartActions.SHOW_CART:
             return {
                 ...currentState,
@@ -51,11 +72,11 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
 export const mapDispatchToProps = dispatch => {
     return {
         setCartItems: items => dispatch(setCartItemsAction(items)),
+        removeCartItem: uid => dispatch(removeCartItemAction(uid)),
         setCartVisibility: visible => dispatch(setCartVisibilityAction(visible))
     };
 }
 
-// state is rootReducer object
 export const mapStateToProps = state => {
     // console.log(state);
     return {

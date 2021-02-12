@@ -27,7 +27,6 @@ class ProductContainer extends Component {
 
   componentDidUpdate(){
     if(this.state.labelId !== this.props.labelId){
-      console.log("in if");
       this.fetchProducts()
       return true;
     }

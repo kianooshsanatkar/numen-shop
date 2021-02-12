@@ -1,12 +1,16 @@
-
-  @font-face {
-    font-family: 'BYekan';
-    src: url('./resource/fonts/BYekan.eot'); /* IE9 Compat Modes */
-    src: url('./resource/fonts/BYekan.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('./resource/fonts/BYekan.woff') format('woff'), /* Modern Browsers */
-         url('./resource/fonts/BYekan.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('./resource/fonts/BYekan.svg#svgFontName') format('svg'); /* Legacy iOS */
-  }
+@font-face {
+  font-family: 'BYekan';
+  src: url('./resource/fonts/BYekan.eot');
+  /* IE9 Compat Modes */
+  src: url('./resource/fonts/BYekan.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */
+    url('./resource/fonts/BYekan.woff') format('woff'),
+    /* Modern Browsers */
+    url('./resource/fonts/BYekan.ttf') format('truetype'),
+    /* Safari, Android, iOS */
+    url('./resource/fonts/BYekan.svg#svgFontName') format('svg');
+  /* Legacy iOS */
+}
 
 h1,
 h2,
@@ -17,15 +21,24 @@ h6,
 p {
   direction: rtl;
 }
-h1{
+
+h1 {
   font-size: 3em;
 }
-.yekan-text{
-  font-family: BYekan!important;
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
-body{
+
+.yekan-text {
+  font-family: BYekan !important;
+}
+
+body {
   font-family: BYekan;
 }
+
 .App {}
 
 ul {

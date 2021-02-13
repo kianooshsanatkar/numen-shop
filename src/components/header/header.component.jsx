@@ -20,8 +20,14 @@ class Header extends Component {
     menuVisibility: false,
   };
 
+  totalQuantityCalculator() {
+    let q = this.props.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    if (q > 9) q = 9;
+    return q;
+  }
 
   render() {
+    const totalQuantity = this.totalQuantityCalculator();
     return (
       <header>
         <nav className="header-nav">
@@ -47,6 +53,7 @@ class Header extends Component {
               }}
               style={{ zIndex: 10 }}
             ></ShoppingCartOutlinedIcon>
+            {totalQuantity > 0 ? <div class="cart-items-number">{totalQuantity}</div> : null}
           </div>
           <div className="header-border"></div>
         </nav>

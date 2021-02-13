@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Spiral as Hamburger } from "hamburger-react";
@@ -10,12 +10,17 @@ import Logo from "../../resource/images/logo.png";
 import Cart from "../cart/cart.component";
 
 import "./header.style.css";
-import { mapDispatchToProps } from "../../redux/cart/cart-reducer";
+import {
+  mapDispatchToProps,
+  mapStateToProps,
+} from "../../redux/cart/cart-reducer";
 
 class Header extends Component {
   state = {
     menuVisibility: false,
   };
+
+
   render() {
     return (
       <header>
@@ -52,9 +57,15 @@ class Header extends Component {
             position: "fixed",
             cursor: "pointer",
             backgroundColor: "rgba(0,0,0,.1)",
-            display: this.state.menuVisibility ? "block" : "none",
+            display:
+              this.state.menuVisibility || this.props.cartVisibility
+                ? "block"
+                : "none",
           }}
-          onClick={() => this.setState({ menuVisibility: false })}
+          onClick={() => {
+            this.props.setCartVisibility(false);
+            this.setState({ menuVisibility: false });
+          }}
         ></div>
         <Menu
           menuVisibility={this.state.menuVisibility}
@@ -65,4 +76,4 @@ class Header extends Component {
     );
   }
 }
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

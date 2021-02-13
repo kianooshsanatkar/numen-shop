@@ -37,7 +37,7 @@ class ProductContainer extends Component {
     return (
       <Grid container spacing={6}>
         {this.state.products.map((product) => (
-          <ProductItem key={product.uid} product={product} />
+          <ProductItem key={product.uid} product={product} showPrice={this.props.showPrice} />
         ))}
       </Grid>
     );

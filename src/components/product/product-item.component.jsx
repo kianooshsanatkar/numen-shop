@@ -27,30 +27,32 @@ function ProductItem(props) {
           </div>
         </div>
       </Link>
-      <Grid item container xs={12}>
-        <Grid item xs={8} style={{ textAlign: "left", paddingLeft: "10px" }}>
-          <h3>{props.product.price}</h3>
+      {props.showPrice === true ? (
+        <Grid item container xs={12}>
+          <Grid item xs={8} style={{ textAlign: "left", paddingLeft: "10px" }}>
+            <h3>{props.product.price}</h3>
+          </Grid>
+          <Grid item xs={4}>
+            <IconButton
+              style={{ float: "right" }}
+              onClick={() => {
+                props.setCartVisibility(true);
+                props.setCartItems({
+                  uid: props.product.uid,
+                  title: props.product.title,
+                  price: props.product.price,
+                  quantity: 1,
+                  image: images ? images[0] : null,
+                });
+              }}
+              color="primary"
+              aria-label="add to shopping cart"
+            >
+              <AddShoppingCartRoundedIcon />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <IconButton
-            style={{ float: "right" }}
-            onClick={() => {
-              props.setCartVisibility(true);
-              props.setCartItems({
-                uid: props.product.uid,
-                title: props.product.title,
-                price: props.product.price,
-                quantity: 1,
-                image: images ? images[0] : null,
-              });
-            }}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <AddShoppingCartRoundedIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
+      ) : null}
     </Grid>
   );
 }

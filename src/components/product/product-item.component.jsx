@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { IconButton, Typography } from "@material-ui/core";
 import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
 
-import { mapDispatchToProps } from "../../redux/cart/cart-reducer";
+import { mapDispatchToProps } from "../../redux/cart/cart.reducer";
 import NoImage from "../../resource/images/no-image-available.jpg";
 import { Link } from "react-router-dom";
 

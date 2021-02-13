@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import {
   mapDispatchToProps,
   mapStateToProps,
-} from "../../redux/cart/cart-reducer";
+} from "../../redux/cart/cart.reducer";
 import CartItem from "./cart-item.component";
 import "./cart.style.css";
 import { Button } from "@material-ui/core";

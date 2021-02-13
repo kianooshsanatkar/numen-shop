@@ -22,7 +22,7 @@ import { connect } from "react-redux";
 import {
   mapStateToProps,
   mapDispatchToProps,
-} from "../../redux/cart/cart-reducer";
+} from "../../redux/cart/cart.reducer";
 
 class ProductPage extends Component {
   state = {

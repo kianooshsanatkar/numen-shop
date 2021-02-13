@@ -3,7 +3,7 @@ import { Grid, IconButton } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import React from "react";
 
-import { mapDispatchToProps } from "../../redux/cart/cart-reducer";
+import { mapDispatchToProps } from "../../redux/cart/cart.reducer";
 import NoImage from "../../resource/images/no-image-available.jpg";
 
 function getImagePath(fileName, size = "thumbnail") {

@@ -15,8 +15,10 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 
 import "./menu.style.css";
 import MenuItem from "./menu-items.component";
+import { connect } from "react-redux";
+import { mapStateToProps, mapDispatchToProps } from "../../redux/user.reducer";
 
-export default class Menu extends Component {
+class Menu extends Component {
   state = {
     labels: [],
     authDialog: false,
@@ -83,7 +85,12 @@ export default class Menu extends Component {
         }),
       })
         .then((response) => response.json())
-        .then((data) => alert(data));
+        .then((data) => {
+          if (data && data.login === true) {
+            this.props.login(data);
+            this.setState({ authDialog: false });
+          }
+        });
     }
   }
   register() {}
@@ -100,73 +107,85 @@ export default class Menu extends Component {
           <CloseOutlinedIcon fontSize="large"></CloseOutlinedIcon>
         </div>
         <div className="profile-button">
-          <IconButton color="secondary" onClick={() => this.setState({ authDialog: true })}>
-            <PersonRoundedIcon />
-          </IconButton>
+          {this.props.user ? (
+            <span>✋سلام {this.props.user.first_name}</span>
+          ) : null}
+          {this.props.user ? (
+            <IconButton color="primary">
+              <PersonRoundedIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              color="secondary"
+              onClick={() => this.setState({ authDialog: true })}
+            >
+              <PersonRoundedIcon />
+            </IconButton>
+          )}
         </div>
         <div className="border-line"></div>
-        <ul>
-          {this.state.labels.map((label) => this.append_category(label))}
-        </ul>
+        <ul>{this.state.labels.map((label) => this.append_category(label))}</ul>
         <Dialog
-              open={this.state.authDialog}
-              onClose={() => {
-                this.setState({ authDialog: false });
-              }}
-              aria-labelledby="form-dialog-title"
-            >
-              <DialogTitle
-                style={{ backgroundColor: "#333", color: "#fff" }}
-                id="form-dialog-title"
-              >
-                <div style={{ margin: 0 }} className="yekan-text">
-                  ورود به حساب کاربری
-                </div>
-              </DialogTitle>
-              <DialogContent>
-                {/* <DialogContentText>
+          open={this.state.authDialog}
+          onClose={() => {
+            this.setState({ authDialog: false });
+          }}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle
+            style={{ backgroundColor: "#333", color: "#fff" }}
+            id="form-dialog-title"
+          >
+            <div style={{ margin: 0 }} className="yekan-text">
+              ورود به حساب کاربری
+            </div>
+          </DialogTitle>
+          <DialogContent>
+            {/* <DialogContentText>
                   .برای ورود لطفا ایمیل و پسوورد خود را وارد کنید، و اگر حساب کاربری ندارید لطفا از تب ایجاد حساب اقدام نمایید
                 </DialogContentText> */}
-                <form>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.handleChange.bind(this)}
-                    label="phone"
-                    placeholder="09121234567"
-                    type="tel"
-                    fullWidth
-                    required
-                  />
-                  <TextField
-                    margin="dense"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.handleChange.bind(this)}
-                    label="Password"
-                    type="Password"
-                    fullWidth
-                    required
-                  />
-                </form>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={() => {
-                    this.setState({ authDialog: false });
-                  }}
-                  color="primary"
-                >
-                  بستن
-                </Button>
-                <Button onClick={this.logIn.bind(this)} color="primary">
-                  ورود
-                </Button>
-              </DialogActions>
-            </Dialog>
+            <form>
+              <TextField
+                autoFocus
+                margin="dense"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange.bind(this)}
+                label="phone"
+                placeholder="09121234567"
+                type="tel"
+                fullWidth
+                required
+              />
+              <TextField
+                margin="dense"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange.bind(this)}
+                label="Password"
+                type="Password"
+                fullWidth
+                required
+              />
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                this.setState({ authDialog: false });
+              }}
+              color="primary"
+            >
+              بستن
+            </Button>
+            <Button onClick={this.logIn.bind(this)} color="primary">
+              ورود
+            </Button>
+          </DialogActions>
+        </Dialog>
       </aside>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

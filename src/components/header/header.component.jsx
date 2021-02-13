@@ -13,7 +13,7 @@ import "./header.style.css";
 import {
   mapDispatchToProps,
   mapStateToProps,
-} from "../../redux/cart/cart-reducer";
+} from "../../redux/cart/cart.reducer";
 
 class Header extends Component {
   state = {
@@ -53,7 +53,7 @@ class Header extends Component {
               }}
               style={{ zIndex: 10 }}
             ></ShoppingCartOutlinedIcon>
-            {totalQuantity > 0 ? <div class="cart-items-number">{totalQuantity}</div> : null}
+            {totalQuantity > 0 ? <div className="cart-items-number">{totalQuantity}</div> : null}
           </div>
           <div className="header-border"></div>
         </nav>

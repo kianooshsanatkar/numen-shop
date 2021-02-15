@@ -32,7 +32,7 @@ class ProductPage extends Component {
   };
   componentDidMount() {
     let productId = this.props.match.params.productId;
-    fetch("http://127.0.0.1:5000/api/product/" + productId)
+    fetch("/api/product/" + productId)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -46,7 +46,7 @@ class ProductPage extends Component {
   getImagePath(fileName, size = "small") {
     if (fileName === null || fileName === undefined || fileName === "")
       return NoImage;
-    let link_path = "http://127.0.0.1:5000/static/images/";
+    let link_path = "/static/images/";
     return link_path + fileName + "_" + size + ".jpg";
   }
 

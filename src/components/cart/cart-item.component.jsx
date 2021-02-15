@@ -9,7 +9,7 @@ import NoImage from "../../resource/images/no-image-available.jpg";
 function getImagePath(fileName, size = "thumbnail") {
   if (fileName === null || fileName === undefined || fileName === "")
     return NoImage;
-  let link_path = "http://127.0.0.1:5000/static/images/";
+  let link_path = "/static/images/";
   return link_path + fileName + "_" + size + ".jpg";
 }
 function CartItem(props) {

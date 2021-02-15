@@ -13,7 +13,7 @@ class Products extends Component {
 
   fetchLabelData() {
     let labelId = this.props.match.params.labelId;
-    fetch("http://127.0.0.1:5000/api/label/" + labelId)
+    fetch("/api/label/" + labelId)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -27,7 +27,7 @@ class Products extends Component {
   }
 
   componentDidUpdate(){
-    if(this.state.label && this.state.label.uid != this.props.match.params.labelId){
+    if(this.state.label && String(this.state.label.uid) !== this.props.match.params.labelId){
       this.fetchLabelData()
     }
   }

@@ -12,7 +12,7 @@ class ProductContainer extends Component {
 
   fetchProducts(){
     this.setState({ labelId: this.props.labelId });
-    fetch("http://127.0.0.1:5000/api/label/products/" + this.props.labelId)
+    fetch("/api/label/products/" + this.props.labelId)
         .then((response) => response.json())
         .then((data) => {
           this.setState({ products: data });

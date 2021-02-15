@@ -9,7 +9,7 @@ import NoImage from "../../resource/images/no-image-available.jpg";
 import { Link } from "react-router-dom";
 
 function ProductItem(props) {
-  let link_path = "http://127.0.0.1:5000/static/images/";
+  let link_path = "/static/images/";
   let suffix = "_small.jpg";
   let images = props.product.images ? props.product.images.split(",") : null;
   return (

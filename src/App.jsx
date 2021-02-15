@@ -1,17 +1,40 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
 import Main from "./pages/main/main.page";
-import "./App.css";
 import Products from "./pages/products/products.page";
 import ProductPage from "./pages/product/product.page";
+import { mapDispatchToProps } from "./redux/user.reducer";
+import "./App.css";
 
 class App extends Component {
   state = {
     is_hidden: false,
   };
+
+  componentDidMount() {
+    fetch("/auth/token/access/").then((response) => {
+      console.log("Response:", response);
+      if (
+        response.status === 401 &&
+        response.json().msg === "Token has expired"
+      ) {
+        fetch("/auth/token/refresh/")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Refresh:", data);
+            this.props.login(data);
+          });
+      }
+      else if (response.status === 200){
+        let data = response.json();
+        this.props.login(data);
+      }
+    });
+  }
 
   render() {
     return (
@@ -38,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);

@@ -22,12 +22,12 @@ class Menu extends Component {
   state = {
     labels: [],
     authDialog: false,
-    email: "",
+    phone: "",
     password: "",
   };
 
   componentDidMount() {
-    fetch("http://localhost:5000/api/labels/")
+    fetch("/api/labels/")
       .then((response) => response.json())
       .then((data) => {
         if (data) {
@@ -70,17 +70,16 @@ class Menu extends Component {
       </li>
     );
   }
-  emailValidation() {}
 
   logIn() {
-    if (this.state.email && this.state.password) {
-      fetch("http://127.0.0.1:5000/auth/login", {
+    if (this.state.phone && this.state.password) {
+      fetch("/auth/login", {
         method: "put",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          phone: this.state.email,
+          phone: this.state.phone,
           password: this.state.password,
         }),
       })
@@ -108,7 +107,7 @@ class Menu extends Component {
         </div>
         <div className="profile-button">
           {this.props.user ? (
-            <span>✋سلام {this.props.user.first_name}</span>
+            <span>✋سلام {this.props.user.firstName}</span>
           ) : null}
           {this.props.user ? (
             <IconButton color="primary">
@@ -148,8 +147,8 @@ class Menu extends Component {
               <TextField
                 autoFocus
                 margin="dense"
-                name="email"
-                value={this.state.email}
+                name="phone"
+                value={this.state.phone}
                 onChange={this.handleChange.bind(this)}
                 label="phone"
                 placeholder="09121234567"

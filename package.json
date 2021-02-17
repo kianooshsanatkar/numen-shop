@@ -23,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "copy": "@powershell copy-item -Force -Path './build/index.html' -Destination '../numen-app/templates/' ; copy-item -Force -Path ./build/static/* -Destination ../numen-app/static/ -Recurse",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

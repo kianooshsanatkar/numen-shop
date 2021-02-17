@@ -16,24 +16,27 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("/auth/token/access/").then((response) => {
-      console.log("Response:", response);
-      if (
-        response.status === 401 &&
-        response.json().msg === "Token has expired"
-      ) {
-        fetch("/auth/token/refresh/")
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Refresh:", data);
-            this.props.login(data);
-          });
-      }
-      else if (response.status === 200){
-        let data = response.json();
-        this.props.login(data);
-      }
-    });
+    fetch("/auth/token/access/")
+      .then((response) => {
+        console.log("Response:", response);
+        if (
+          response.status === 401 &&
+          response.json().msg === "Token has expired"
+        ) {
+          fetch("/auth/token/refresh/")
+            .then((response) => response.json())
+            .then((data) => {
+              this.props.login(data);
+            });
+          return null;
+        } else if (response.status === 200) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        if (data)
+          this.props.login(data);
+      });
   }
 
   render() {

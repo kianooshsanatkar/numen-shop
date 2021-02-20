@@ -1,0 +1,13 @@
+{
+  "first_name": "kianoosh",
+  "last_name": "sanatkar",
+  "phone": "09121234567",
+  "email": "kianoosh@knsn.ir",
+  "addresses": [
+    {
+      "uid": 1,
+      "postal_address": "niavaran, manzarie",
+      "zip_code": "1234567890"
+    }
+  ]
+}

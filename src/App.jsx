@@ -9,6 +9,8 @@ import Products from "./pages/products/products.page";
 import ProductPage from "./pages/product/product.page";
 import { mapDispatchToProps } from "./redux/user.reducer";
 import "./App.css";
+import Profile from "./pages/profile/profile.page";
+import EditableProfile from "./pages/profile-editable/profile-editable.page";
 
 class App extends Component {
   state = {
@@ -18,15 +20,13 @@ class App extends Component {
   componentDidMount() {
     fetch("/auth/token/access/")
       .then((response) => {
-        console.log("Response:", response);
-        if (
-          response.status === 401 &&
-          response.json().msg === "Token has expired"
-        ) {
+        if (response.status === 401) {
           fetch("/auth/token/refresh/")
-            .then((response) => response.json())
+            .then((response) => {
+              if (response.status === 200) return response.json();
+            })
             .then((data) => {
-              this.props.login(data);
+              if (data) this.props.login(data);
             });
           return null;
         } else if (response.status === 200) {
@@ -34,8 +34,7 @@ class App extends Component {
         }
       })
       .then((data) => {
-        if (data)
-          this.props.login(data);
+        if (data) this.props.login(data);
       });
   }
 
@@ -44,13 +43,25 @@ class App extends Component {
       <div className="App">
         <Router>
           <Header></Header>
-          <div>
+          <div style={{ paddingTop: "70px" }}>
             <Switch>
+              <Route exact path="/profile/edit/">
+                <EditableProfile
+                  getUserUrl="/api/user/"
+                  sendDataUrl="/api/user/"
+                />
+              </Route>
+              <Route exact path="/profile/">
+                <Profile getUserUrl="/api/user/" />
+              </Route>
               <Route exact path="/product/:productId">
                 <ProductPage></ProductPage>
               </Route>
               <Route exact path="/products/:labelId">
                 <Products />
+              </Route>
+              <Route exact path="/profile/">
+                <Profile />
               </Route>
               <Route path="/">
                 <Main></Main>

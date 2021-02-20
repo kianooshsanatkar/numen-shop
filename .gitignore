@@ -26,3 +26,6 @@ yarn-error.log*
 .vscode
 
 .eslintcache
+
+# mock files
+/public/mocked/images

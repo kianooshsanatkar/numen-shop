@@ -8,33 +8,40 @@ import {
 } from "@material-ui/core";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import React from "react";
+import { BrowserRouter as Router,Link } from 'react-router-dom'
+
 
 import Thumbnail from "../../components/thumbnail";
 
 export default function CartItem(props) {
   return (
-    <Paper elevation={1} style={{margin:"1em auto", textAlign:"center"}}>
+    <Router>
+    <Paper elevation={1} style={{ margin: "1em auto", textAlign: "center" }}>
       <Grid
         container
         style={{ direction: "rtl" }}
         spacing={3}
         alignContent="center"
       >
-      <Grid item md={1} sm={2} xs={6}>
-        <IconButton
-          aria-label="delete"
-          onClick={() => {
-            props.delete(props.uid);
-          }}
-        >
-          <DeleteOutlinedIcon />
-        </IconButton>
-      </Grid>
+        <Grid item md={1} sm={2} xs={6}>
+          <IconButton
+            aria-label="delete"
+            onClick={() => {
+              props.delete(props.uid);
+            }}
+          >
+            <DeleteOutlinedIcon />
+          </IconButton>
+        </Grid>
         <Grid item md={2} sm={4} xs={6}>
-          <Thumbnail src={props.image} alt={props.title} />
+          <Link to={"/product/" + props.uid}>
+            <Thumbnail src={props.image} alt={props.title} />
+          </Link>
         </Grid>
         <Grid item md={4} sm={6} xs={12}>
-          <Typography variant="h5">{props.title}</Typography>
+          <Link to={"/product/" + props.uid}>
+            <Typography variant="h5">{props.title}</Typography>
+          </Link>
         </Grid>
         <Grid item md={3} sm={6} xs={12}>
           <ButtonGroup style={{ direction: "ltr" }}>
@@ -66,5 +73,6 @@ export default function CartItem(props) {
         </Grid>
       </Grid>
     </Paper>
+    </Router>
   );
 }

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 
-import CartItem from '../pages/cart-check/cart.component';
+import CartItem from '../pages/cart-check/cartItem.component';
 
 export default {
     title: "Pages/CartComponent"

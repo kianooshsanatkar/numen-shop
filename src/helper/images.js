@@ -1,3 +1,5 @@
+import NoImage from "../resource/images/no-image-available.jpg";
+
 export const ImageSize = {
     Thumbnail: "thumbnail"
     , Small: "small"
@@ -5,7 +7,11 @@ export const ImageSize = {
     , Large: "large"
 }
 
+const prefix="http://localhost"
+
 export default function getRelativeImageUrl(imageName, imageSize) {
-    const path = "/mocked/images/";
+    if (imageName === null || imageName === undefined || imageName === "")
+    return NoImage;
+    const path = prefix + "/static/images/";
     return path + imageName + "_" + imageSize + ".jpg";
 }

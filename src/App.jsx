@@ -51,6 +51,9 @@ class App extends Component {
               <Route exact path="/products/:labelId">
                 <Products />
               </Route>
+              <Route exact path="/cart/">
+                <CartCheckPage />
+              </Route>
               <Route exact path="/profile/">
                 <Profile />
               </Route>

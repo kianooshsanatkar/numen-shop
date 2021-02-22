@@ -24,6 +24,7 @@ import {
   mapStateToProps,
   mapDispatchToProps,
 } from "../../redux/cart/cart.reducer";
+import {LandScape, SmallImage } from '../../components/image';
 
 class ProductPage extends Component {
   state = {
@@ -79,23 +80,27 @@ class ProductPage extends Component {
                     </Grid>
                   </Hidden>
                   <Grid item xs={12}>
-                    <img
-                      className="product-images"
-                      src={this.getImagePath(this.state.selectedImage, "large")}
-                      alt={this.state.product.title}
-                    ></img>
+                    <LandScape className="product-images"
+                      src={this.state.selectedImage}
+                      alt={this.state.product.title} />
                   </Grid>
                   <Grid item container xs={12} spacing={2}>
                     {this.state.images.map((image) => (
                       <Grid key={image} item xs={4} md={3}>
-                        <img
+                        <SmallImage className="product-images"
+                          onClick={() =>
+                            this.setState({ selectedImage: image })
+                          }
+                          src={image}
+                          alt={this.state.product.title} />
+                        {/* <img
                           className="product-images"
                           onClick={() =>
                             this.setState({ selectedImage: image })
                           }
                           src={this.getImagePath(image)}
                           alt={this.state.product.title}
-                        />
+                        /> */}
                       </Grid>
                     ))}
                   </Grid>

@@ -17,6 +17,8 @@ import "./menu.style.css";
 import MenuItem from "./menu-items.component";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../../redux/user.reducer";
+import { login } from "../../services/auth";
+import { getLabels } from "../../services/label";
 
 class Menu extends Component {
   state = {
@@ -27,9 +29,7 @@ class Menu extends Component {
   };
 
   componentDidMount() {
-    fetch("/api/labels/")
-      .then((response) => response.json())
-      .then((data) => {
+    getLabels().then((data) => {
         if (data) {
           let labels = data
             .sort((x, y) => x.parent - y.parent)
@@ -72,25 +72,11 @@ class Menu extends Component {
   }
 
   logIn() {
-    if (this.state.phone && this.state.password) {
-      fetch("/auth/login", {
-        method: "put",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          phone: this.state.phone,
-          password: this.state.password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.login === true) {
-            this.props.login(data);
-            this.setState({ authDialog: false });
-          }
-        });
-    }
+    login(this.state.phone, this.state.password).then((result) => {
+      console.log(result);
+      const [logged, user] = result;
+      if (logged === true) this.props.login(user);
+    });
   }
   register() {}
   handleChange(event) {

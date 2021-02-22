@@ -11,7 +11,7 @@ import React from "react";
 import { BrowserRouter as Router,Link } from 'react-router-dom'
 
 
-import Thumbnail from "../../components/thumbnail";
+import {Thumbnail} from "../../components/image";
 
 export default function CartItem(props) {
   return (

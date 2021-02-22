@@ -50,7 +50,7 @@ export async function isLoggedIn() {
     let result = await response.json();
     if (response.ok) {
         return [true, result.data];
-    } else if (response.status === 401 && result.msg === 'Token is expire') {
+    } else if (response.status === 401 && result.msg === 'Token has expired') {
         let refreshResponse = await fetch(URLs.Refresh, {
             method: 'get',
             headers: getHeaderRefAuth()
@@ -58,7 +58,7 @@ export async function isLoggedIn() {
         let refreshResult = await refreshResponse.json()
         if (refreshResponse.ok) {
             localStorage.setItem('jwt_access', refreshResult.access_token)
-            return [true, result.data];
+            return [true, refreshResult.data];
         }
         else {
             return [false, result.msg];

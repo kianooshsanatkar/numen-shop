@@ -4,14 +4,8 @@ import { Close } from "@material-ui/icons";
 import React from "react";
 
 import { mapDispatchToProps } from "../../redux/cart/cart.reducer";
-import NoImage from "../../resource/images/no-image-available.jpg";
+import { Thumbnail } from "../image";
 
-function getImagePath(fileName, size = "thumbnail") {
-  if (fileName === null || fileName === undefined || fileName === "")
-    return NoImage;
-  let link_path = "/static/images/";
-  return link_path + fileName + "_" + size + ".jpg";
-}
 function CartItem(props) {
   return (
     <div className="cart-item" style={{ borderBottom: "solid 1px black" }}>
@@ -28,11 +22,7 @@ function CartItem(props) {
           </IconButton>
         </Grid>
         <Grid item xs={4}>
-          <img
-            style={{ width: "70px" }}
-            src={getImagePath(props.product.image)}
-            alt={props.product.title}
-          />
+          <Thumbnail src={props.product.image} alt={props.product.title} />
         </Grid>
         <Grid item xs={7}>
           <h3>{props.product.title}</h3>

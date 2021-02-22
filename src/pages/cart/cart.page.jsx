@@ -15,7 +15,7 @@ import { calculateTotalPrice } from "../../helper/calculator";
 import Price from "../../components/price/price.component";
 
 
-function CartCheckPage(props) {
+function CartPage(props) {
   return !props.cartItems ? (
     <main></main>
   ) : (
@@ -64,4 +64,4 @@ function CartCheckPage(props) {
 }
 
 // export default CartCheckPage;
-export default connect(mapStateToProps,mapDispatchToProps)(CartCheckPage);
+export default connect(mapStateToProps,mapDispatchToProps)(CartPage);

@@ -11,7 +11,7 @@ import { mapDispatchToProps } from "./redux/user.reducer";
 import "./App.css";
 import Profile from "./pages/profile/profile.page";
 import EditableProfile from "./pages/profile-editable/profile-editable.page";
-import CartCheckPage from "./pages/cart-check";
+import CartPage from "./pages/cart";
 import { isLoggedIn } from "./services/auth";
 
 class App extends Component {
@@ -34,9 +34,6 @@ class App extends Component {
           <div style={{ paddingTop: "70px" }}>
             <Switch>
               <Route exact path="/profile/edit/">
-                <CartCheckPage />
-              </Route>
-              <Route exact path="/profile/edit/">
                 <EditableProfile
                   getUserUrl="/api/user/"
                   sendDataUrl="/api/user/"
@@ -52,7 +49,7 @@ class App extends Component {
                 <Products />
               </Route>
               <Route exact path="/cart/">
-                <CartCheckPage />
+                <CartPage />
               </Route>
               <Route exact path="/profile/">
                 <Profile />

@@ -18,6 +18,7 @@ import NoImage from "../../resource/images/no-image-available.jpg";
 import HeightSpace from "../../components/space/space.component";
 import "./product.style.css";
 import { connect } from "react-redux";
+import {getProduct} from '../../services/product';
 
 import {
   mapStateToProps,
@@ -32,9 +33,7 @@ class ProductPage extends Component {
   };
   componentDidMount() {
     let productId = this.props.match.params.productId;
-    fetch("/api/product/" + productId)
-      .then((response) => response.json())
-      .then((data) => {
+    getProduct(productId).then((data) => {
         this.setState({
           product: data,
           images: data.images.split(","),

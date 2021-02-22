@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import ProductItem from "./product-item.component";
 import "./product-container.style.css";
+import { getProducts } from "../../services/product";
 
 class ProductContainer extends Component {
   state = {
@@ -10,24 +11,22 @@ class ProductContainer extends Component {
     products: [],
   };
 
-  fetchProducts(){
+  fetchProducts() {
     this.setState({ labelId: this.props.labelId });
-    fetch("/api/label/products/" + this.props.labelId)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({ products: data });
-        });
+    getProducts(this.props.labelId).then((data) => {
+      this.setState({ products: data });
+    });
   }
 
   componentDidMount() {
     if (this.props.labelId) {
-      this.fetchProducts()
+      this.fetchProducts();
     }
   }
 
-  componentDidUpdate(){
-    if(this.state.labelId !== this.props.labelId){
-      this.fetchProducts()
+  componentDidUpdate() {
+    if (this.state.labelId !== this.props.labelId) {
+      this.fetchProducts();
       return true;
     }
     return false;
@@ -37,7 +36,11 @@ class ProductContainer extends Component {
     return (
       <Grid container spacing={6}>
         {this.state.products.map((product) => (
-          <ProductItem key={product.uid} product={product} showPrice={this.props.showPrice} />
+          <ProductItem
+            key={product.uid}
+            product={product}
+            showPrice={this.props.showPrice}
+          />
         ))}
       </Grid>
     );

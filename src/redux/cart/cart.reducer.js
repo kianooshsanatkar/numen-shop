@@ -1,32 +1,23 @@
 const INITIAL_STATE = {
-    cartItems: [],
-    cartVisibility: false
+    cartItems: []
 }
 
 export const cartActions = {
     UPDATE_CART_ITEM: "UPDATE_CART",
-    SHOW_CART: "SHOW_CART",
     REMOVE_CART_ITEM: "REMOVE_CART_ITEM"
 }
 
-export function setCartItemsAction(item) {
+export function addProductAction(item) {
     return {
         type: cartActions.UPDATE_CART_ITEM,
         payload: item
     }
 }
 
-export function removeCartItemAction(uid) {
+export function removeProductAction(uid) {
     return {
         type: cartActions.REMOVE_CART_ITEM,
         payload: uid
-    }
-}
-
-export function setCartVisibilityAction(visible) {
-    return {
-        type: cartActions.SHOW_CART,
-        payload: visible
     }
 }
 
@@ -57,11 +48,6 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
             }
             return currentState;
         }
-        case cartActions.SHOW_CART:
-            return {
-                ...currentState,
-                cartVisibility: action.payload === null || action.payload === undefined ? !currentState.cartVisibility : action.payload
-            }
         default:
             return currentState;
     }
@@ -71,16 +57,14 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
 
 export const mapDispatchToProps = dispatch => {
     return {
-        setCartItems: items => dispatch(setCartItemsAction(items)),
-        removeCartItem: uid => dispatch(removeCartItemAction(uid)),
-        setCartVisibility: visible => dispatch(setCartVisibilityAction(visible))
+        setCartItems: items => dispatch(addProductAction(items)),
+        removeCartItem: uid => dispatch(removeProductAction(uid))
     };
 }
 
 export const mapStateToProps = state => {
     // console.log(state);
     return {
-        cartItems: state.cart.cartItems,
-        cartVisibility: state.cart.cartVisibility
+        cartItems: state.cart.cartItems
     };
 }

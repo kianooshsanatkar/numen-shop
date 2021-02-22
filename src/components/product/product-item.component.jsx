@@ -4,7 +4,11 @@ import Grid from "@material-ui/core/Grid";
 import { IconButton, Typography } from "@material-ui/core";
 import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
 
-import { mapDispatchToProps } from "../../redux/cart/cart.reducer";
+import {
+  mapDispatchToProps as cartDrawerDispatch,
+  mapStateToProps as cartDrawerState,
+} from "../../redux/cart-drawer.reducer";
+import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart/cart.reducer";
 import NoImage from "../../resource/images/no-image-available.jpg";
 import { Link } from "react-router-dom";
 import getRelativeImageUrl, {ImageSize} from '../../helper/images';
@@ -36,7 +40,7 @@ function ProductItem(props) {
             <IconButton
               style={{ float: "right" }}
               onClick={() => {
-                props.setCartVisibility(true);
+                props.showCartDrawer();
                 props.setCartItems({
                   uid: props.product.uid,
                   title: props.product.title,
@@ -55,6 +59,14 @@ function ProductItem(props) {
       ) : null}
     </Grid>
   );
+}
+
+
+function mapDispatchToProps(dispatch){
+  return {
+    ...cartDispatch(dispatch),
+    ...cartDrawerDispatch(dispatch)
+  }
 }
 
 export default connect(null, mapDispatchToProps)(ProductItem);

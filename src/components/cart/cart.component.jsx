@@ -6,8 +6,9 @@ import Grid from "@material-ui/core/Grid";
 
 import {
   mapDispatchToProps,
-  mapStateToProps,
-} from "../../redux/cart/cart.reducer";
+  mapStateToProps as cartDrawerState,
+} from "../../redux/cart-drawer.reducer";
+import { mapStateToProps as cartState } from "../../redux/cart/cart.reducer";
 import CartItem from "./cart-item.component";
 import "./cart.style.css";
 import { Button } from "@material-ui/core";
@@ -32,7 +33,7 @@ class Cart extends Component {
             <div className="close-cart-button">
               <CloseOutlinedIcon
                 onClick={() => {
-                  this.props.setCartVisibility();
+                  this.props.hideCartDrawer();
                 }}
                 fontSize="large"
               ></CloseOutlinedIcon>
@@ -68,7 +69,7 @@ class Cart extends Component {
                   <Link to="/cart/">
                     <Button
                       onClick={() => {
-                        this.props.setCartVisibility(false);
+                        this.props.hideCartDrawer();
                       }}
                       size="large"
                       fullWidth
@@ -88,4 +89,9 @@ class Cart extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { ...cartDrawerState(state), ...cartState(state) };
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

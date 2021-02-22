@@ -21,9 +21,10 @@ import { connect } from "react-redux";
 import {getProduct} from '../../services/product';
 
 import {
-  mapStateToProps,
-  mapDispatchToProps,
-} from "../../redux/cart/cart.reducer";
+  mapDispatchToProps as cartDrawerDispatch,
+  mapStateToProps as cartDrawerState,
+} from "../../redux/cart-drawer.reducer";
+import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart/cart.reducer";
 import {LandScape, SmallImage } from '../../components/image';
 
 class ProductPage extends Component {
@@ -150,7 +151,7 @@ class ProductPage extends Component {
                   fullWidth
                   style={{ top: "50%", marginTop: "-1em", fontSize: "1.5em" }}
                   onClick={() => {
-                    this.props.setCartVisibility(true);
+                    this.props.showCartDrawer();
                     this.props.setCartItems({
                       uid: this.state.product.uid,
                       title: this.state.product.title,
@@ -168,6 +169,18 @@ class ProductPage extends Component {
         )}
       </main>
     );
+  }
+}
+
+
+function mapStateToProps(state) {
+  return { ...cartDrawerState(state), ...cartState(state) };
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    ...cartDrawerDispatch(dispatch),
+    ...cartDispatch(dispatch)
   }
 }
 

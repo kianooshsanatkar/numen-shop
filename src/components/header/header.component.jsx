@@ -12,8 +12,9 @@ import Cart from "../cart/cart.component";
 import "./header.style.css";
 import {
   mapDispatchToProps,
-  mapStateToProps,
-} from "../../redux/cart/cart.reducer";
+  mapStateToProps as cartDrawerState,
+} from "../../redux/cart-drawer.reducer";
+import { mapStateToProps as cartState } from "../../redux/cart/cart.reducer";
 
 class Header extends Component {
   state = {
@@ -49,11 +50,13 @@ class Header extends Component {
             <ShoppingCartOutlinedIcon
               fontSize="large"
               onClick={() => {
-                this.props.setCartVisibility();
+                this.props.toggleCartDrawer();
               }}
               style={{ zIndex: 10 }}
             ></ShoppingCartOutlinedIcon>
-            {totalQuantity > 0 ? <div className="cart-items-number">{totalQuantity}</div> : null}
+            {totalQuantity > 0 ? (
+              <div className="cart-items-number">{totalQuantity}</div>
+            ) : null}
           </div>
           <div className="header-border"></div>
         </nav>
@@ -70,7 +73,7 @@ class Header extends Component {
                 : "none",
           }}
           onClick={() => {
-            this.props.setCartVisibility(false);
+            this.props.hideCartDrawer();
             this.setState({ menuVisibility: false });
           }}
         ></div>
@@ -83,4 +86,9 @@ class Header extends Component {
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+function localMapStateToProps(state) {
+  return { ...cartDrawerState(state), ...cartState(state) };
+}
+
+export default connect(localMapStateToProps, mapDispatchToProps)(Header);

@@ -11,6 +11,7 @@ import {
 import CartItem from "./cart-item.component";
 import "./cart.style.css";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 class Cart extends Component {
   calculateTotalPrice = () => {
@@ -64,15 +65,17 @@ class Cart extends Component {
                 justify="center"
               >
                 <Grid item xs={12}>
-                  <Button
-                    size="large"
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    style={{fontSize:"1.5em"}}
-                  >
-                    {this.calculateTotalPrice()}
-                  </Button>
+                  <Link to="/cart/">
+                    <Button
+                      size="large"
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      style={{ fontSize: "1.5em" }}
+                    >
+                      {this.calculateTotalPrice()}
+                    </Button>
+                  </Link>
                 </Grid>
               </Grid>
             ) : null}

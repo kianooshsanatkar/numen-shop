@@ -11,6 +11,8 @@ import { mapDispatchToProps } from "./redux/user.reducer";
 import "./App.css";
 import Profile from "./pages/profile/profile.page";
 import EditableProfile from "./pages/profile-editable/profile-editable.page";
+import CartCheckPage from "./pages/cart-check";
+import { isLoggedIn } from "./services/auth";
 
 class App extends Component {
   state = {
@@ -18,24 +20,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("/auth/token/access/")
-      .then((response) => {
-        if (response.status === 401) {
-          fetch("/auth/token/refresh/")
-            .then((response) => {
-              if (response.status === 200) return response.json();
-            })
-            .then((data) => {
-              if (data) this.props.login(data);
-            });
-          return null;
-        } else if (response.status === 200) {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        if (data) this.props.login(data);
-      });
+    isLoggedIn().then((result) => {
+      const [logged, user] = result;
+      if (logged === true) this.props.login(user);
+    });
   }
 
   render() {
@@ -45,6 +33,9 @@ class App extends Component {
           <Header></Header>
           <div style={{ paddingTop: "70px" }}>
             <Switch>
+              <Route exact path="/profile/edit/">
+                <CartCheckPage />
+              </Route>
               <Route exact path="/profile/edit/">
                 <EditableProfile
                   getUserUrl="/api/user/"

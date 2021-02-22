@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import ProductContainer from "../../components/product/product-container.component";
 import HeightSpace from "../../components/space/space.component";
 import "./products.style.css";
+import { getLabel } from '../../services/label';
 
 class Products extends Component {
   state = {
@@ -13,13 +14,7 @@ class Products extends Component {
 
   fetchLabelData() {
     let labelId = this.props.match.params.labelId;
-    fetch("/api/label/" + labelId)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-          label: data,
-        });
-      });
+    getLabel(labelId).then(data => this.setState({label: data}));
   }
 
   componentDidMount() {

@@ -7,17 +7,17 @@ import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounde
 import { mapDispatchToProps } from "../../redux/cart/cart.reducer";
 import NoImage from "../../resource/images/no-image-available.jpg";
 import { Link } from "react-router-dom";
+import getRelativeImageUrl, {ImageSize} from '../../helper/images';
+
 
 function ProductItem(props) {
-  let link_path = "/static/images/";
-  let suffix = "_small.jpg";
   let images = props.product.images ? props.product.images.split(",") : null;
   return (
     <Grid item xs={6} sm={3}>
       <Link to={"/product/" + props.product.uid}>
         <div className="product-item">
           <img
-            src={!images ? NoImage : link_path + images[0] + suffix}
+            src={!images ? NoImage : getRelativeImageUrl(images[0], ImageSize.Small)}
             alt={props.product.title}
           />
           <div className="product-item-title">

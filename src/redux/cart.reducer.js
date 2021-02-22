@@ -3,7 +3,8 @@ const INITIAL_STATE = {
 }
 
 export const cartActions = {
-    UPDATE_CART_ITEM: "UPDATE_CART",
+    UPDATE_CART_ITEM: "UPDATE_CART_ITEM",
+    DELETE_CART_ITEM: "DELETE_CART_ITEM",
     REMOVE_CART_ITEM: "REMOVE_CART_ITEM"
 }
 
@@ -11,6 +12,13 @@ export function addProductAction(item) {
     return {
         type: cartActions.UPDATE_CART_ITEM,
         payload: item
+    }
+}
+
+export function deleteProductAction(uid) {
+    return {
+        type: cartActions.DELETE_CART_ITEM,
+        payload: uid
     }
 }
 
@@ -38,6 +46,23 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
             };
         }
         case cartActions.REMOVE_CART_ITEM: {
+            let found = currentState.cartItems.find(x => x.uid === action.payload.uid);
+            if (found)
+                if (found.quantity > 1) {
+                    found.quantity -= 1;
+                    return {
+                        ...currentState,
+                        cartItems: [...currentState.cartItems]
+                    }
+                } else {
+                    cartReducer(currentState, deleteProductAction(found.uid))
+                }
+                return {
+                    ...currentState
+                }
+
+        }
+        case cartActions.DELETE_CART_ITEM: {
             let foundIndex = currentState.cartItems.findIndex(x => x.uid === action.payload);
             if (foundIndex >= 0) {
                 currentState.cartItems.splice(foundIndex, 1);
@@ -58,7 +83,7 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
 export const mapDispatchToProps = dispatch => {
     return {
         setCartItems: items => dispatch(addProductAction(items)),
-        removeCartItem: uid => dispatch(removeProductAction(uid))
+        removeCartItem: uid => dispatch(deleteProductAction(uid))
     };
 }
 

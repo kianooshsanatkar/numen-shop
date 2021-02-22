@@ -9,11 +9,14 @@ import {
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import React from "react";
 import { BrowserRouter as Router,Link } from 'react-router-dom'
+import {useDispatch} from 'react-redux';
+import {addProductAction, removeProductAction, deleteProductAction} from '../../redux/cart.reducer';
 
 
 import {Thumbnail} from "../../components/image";
 
 export default function CartItem(props) {
+  const dispatch = useDispatch();
   return (
     <Router>
     <Paper elevation={1} style={{ margin: "1em auto", textAlign: "center" }}>
@@ -49,19 +52,19 @@ export default function CartItem(props) {
               color="secondary"
               size="large"
               onClick={() => {
-                props.remove(props.uid);
+                dispatch(removeProductAction(props))
               }}
             >
               -
             </Button>
-            <Button size="large" color="default" disabled>
+            <Button size="large" style={{color:'black'}} disabled>
               {props.quantity}
             </Button>
             <Button
               color="primary"
               size="large"
               onClick={() => {
-                props.add(props.uid);
+                dispatch(addProductAction(props))
               }}
             >
               +

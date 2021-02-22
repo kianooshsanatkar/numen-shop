@@ -67,6 +67,9 @@ class Cart extends Component {
                 <Grid item xs={12}>
                   <Link to="/cart/">
                     <Button
+                      onClick={() => {
+                        this.props.setCartVisibility(false);
+                      }}
                       size="large"
                       fullWidth
                       color="primary"

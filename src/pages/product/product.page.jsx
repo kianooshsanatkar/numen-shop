@@ -24,7 +24,7 @@ import {
   mapDispatchToProps as cartDrawerDispatch,
   mapStateToProps as cartDrawerState,
 } from "../../redux/cart-drawer.reducer";
-import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart/cart.reducer";
+import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart.reducer";
 import {LandScape, SmallImage } from '../../components/image';
 
 class ProductPage extends Component {

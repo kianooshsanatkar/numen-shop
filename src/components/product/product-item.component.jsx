@@ -8,7 +8,7 @@ import {
   mapDispatchToProps as cartDrawerDispatch,
   mapStateToProps as cartDrawerState,
 } from "../../redux/cart-drawer.reducer";
-import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart/cart.reducer";
+import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart.reducer";
 import NoImage from "../../resource/images/no-image-available.jpg";
 import { Link } from "react-router-dom";
 import getRelativeImageUrl, {ImageSize} from '../../helper/images';

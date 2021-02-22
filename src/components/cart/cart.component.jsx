@@ -8,7 +8,7 @@ import {
   mapDispatchToProps,
   mapStateToProps as cartDrawerState,
 } from "../../redux/cart-drawer.reducer";
-import { mapStateToProps as cartState } from "../../redux/cart/cart.reducer";
+import { mapStateToProps as cartState } from "../../redux/cart.reducer";
 import CartItem from "./cart-item.component";
 import "./cart.style.css";
 import { Button } from "@material-ui/core";

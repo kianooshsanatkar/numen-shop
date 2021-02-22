@@ -3,7 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import cartDrawerReducer from './cart-drawer.reducer';
 
-import cartReducer from './cart/cart.reducer';
+import cartReducer from './cart.reducer';
 import { userReducer } from './user.reducer';
 
 const persistConfig = {

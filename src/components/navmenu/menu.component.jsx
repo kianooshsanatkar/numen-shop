@@ -30,24 +30,24 @@ class Menu extends Component {
 
   componentDidMount() {
     getLabels().then((data) => {
-        if (data) {
-          let labels = data
-            .sort((x, y) => x.parent - y.parent)
-            .filter((x) => x.is_menu_label === true);
-          let root_labels = [];
-          if (labels) {
-            root_labels = labels.filter((label) => {
-              if (!label.parent_id) {
-                label.child = [];
-                return true;
-              }
-              return false;
-            });
-          }
-          root_labels.forEach((label) => this.addChild(label, labels));
-          this.setState({ labels: root_labels });
+      if (data) {
+        let labels = data
+          .sort((x, y) => x.parent - y.parent)
+          .filter((x) => x.is_menu_label === true);
+        let root_labels = [];
+        if (labels) {
+          root_labels = labels.filter((label) => {
+            if (!label.parent_id) {
+              label.child = [];
+              return true;
+            }
+            return false;
+          });
         }
-      });
+        root_labels.forEach((label) => this.addChild(label, labels));
+        this.setState({ labels: root_labels });
+      }
+    });
   }
 
   addChild(label, labels) {
@@ -73,9 +73,11 @@ class Menu extends Component {
 
   logIn() {
     login(this.state.phone, this.state.password).then((result) => {
-      console.log(result);
       const [logged, user] = result;
-      if (logged === true) this.props.login(user);
+      if (logged === true) {
+        this.props.login(user);
+        this.setState({ authDialog: false });
+      }
     });
   }
   register() {}

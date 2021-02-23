@@ -1,16 +1,25 @@
 const INITIAL_STATE = {
-    cartItems: []
+    cartItems: [],
+    discount: null
 }
 
 export const cartActions = {
-    UPDATE_CART_ITEM: "UPDATE_CART_ITEM",
+    ADD_CART_ITEM: "ADD_CART_ITEM",
+    REMOVE_CART_ITEM: "REMOVE_CART_ITEM", // if product exist reduce the quantity by 1
     DELETE_CART_ITEM: "DELETE_CART_ITEM",
-    REMOVE_CART_ITEM: "REMOVE_CART_ITEM"
+    DISCOUNT:"DISCOUNT"
+}
+
+export function addDiscount(discount){
+    return{
+        type: cartActions.DISCOUNT,
+        payload: discount 
+    }
 }
 
 export function addProductAction(item) {
     return {
-        type: cartActions.UPDATE_CART_ITEM,
+        type: cartActions.ADD_CART_ITEM,
         payload: item
     }
 }
@@ -31,7 +40,13 @@ export function removeProductAction(uid) {
 
 export default function cartReducer(currentState = INITIAL_STATE, action) {
     switch (action.type) {
-        case cartActions.UPDATE_CART_ITEM: {
+        case cartActions.DISCOUNT:{
+            return {
+                ...currentState,
+                discount: action.payload
+            }
+        }
+        case cartActions.ADD_CART_ITEM: {
             let found = currentState.cartItems.find(x => x.uid === action.payload.uid);
             if (found) {
                 found.quantity += 1;
@@ -55,7 +70,7 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
                         cartItems: [...currentState.cartItems]
                     }
                 } else {
-                    cartReducer(currentState, deleteProductAction(found.uid))
+                    return cartReducer(currentState, deleteProductAction(found.uid))
                 }
                 return {
                     ...currentState

@@ -30,7 +30,7 @@ export default function CartItem(props) {
           <IconButton
             aria-label="delete"
             onClick={() => {
-              props.delete(props.uid);
+              dispatch(deleteProductAction(props.uid))
             }}
           >
             <DeleteOutlinedIcon />

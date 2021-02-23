@@ -8,17 +8,24 @@ import {
   TableBody,
   Radio,
 } from "@material-ui/core";
+import { getUser } from "../../services/user";
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-function Profile(props) {
+export default function Profile() {
   const [user, setUser] = useState(null);
-
+  const userInStorage = useSelector((state) => state.user);
+  console.log(userInStorage);
   useEffect(() => {
-    console.log("useEffect");
-    fetch(props.getUserUrl)
-      .then((response) => response.json())
-      .then((data) => setUser(data));
-  }, [props.getUserUrl]);
+    if (!user) getUser().then((u) => setUser(u));
+  }, [user]);
+
+  // if (!user)
+  //   getUser().then((u) => setUser(u));
+  if (!userInStorage) {
+    return <Redirect to="/" />;
+  }
 
   return !user ? (
     <main></main>
@@ -62,7 +69,9 @@ function Profile(props) {
                       <TableCell align="right">
                         <h3>آدرس :</h3>
                       </TableCell>
-                      <TableCell align="right">{address.postal_address}</TableCell>
+                      <TableCell align="right">
+                        {address.postal_address}
+                      </TableCell>
                       <TableCell align="center">
                         <Radio />
                       </TableCell>
@@ -76,4 +85,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+// export default Profile;

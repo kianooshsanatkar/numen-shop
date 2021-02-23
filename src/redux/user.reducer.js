@@ -26,7 +26,7 @@ export function userReducer(currentState = USER_INITIAL_STATE, action) {
     }
 }
 
-function userLoginAction(user) {
+export function saveUserStateAction(user) {
     return {
         type: userActionType.LOGIN,
         payload: user
@@ -44,6 +44,6 @@ export const mapStateToProps = (state) => ({
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-    login: user => dispatch(userLoginAction(user)),
+    login: user => dispatch(saveUserStateAction(user)),
     logout: () => dispatch(userLogoutAction())
 })

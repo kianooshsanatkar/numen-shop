@@ -1,69 +1,65 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
 import Main from "./pages/main/main.page";
 import Products from "./pages/products/products.page";
 import ProductPage from "./pages/product/product.page";
-import { mapDispatchToProps } from "./redux/user.reducer";
+import { saveUserStateAction } from "./redux/user.reducer";
 import "./App.css";
 import Profile from "./pages/profile/profile.page";
 import EditableProfile from "./pages/profile-editable/profile-editable.page";
 import CartPage from "./pages/cart";
 import { isLoggedIn } from "./services/auth";
 
-class App extends Component {
-  state = {
-    is_hidden: false,
-  };
-
-  componentDidMount() {
+export default function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  if (!user) {
     isLoggedIn().then((result) => {
       const [logged, user] = result;
-      if (logged === true) this.props.login(user);
+      if (logged === true) dispatch(saveUserStateAction(user));
     });
   }
 
-  render() {
-    return (
-      <div className="App">
-        <Router>
-          <Header></Header>
-          <div style={{ paddingTop: "70px" }}>
-            <Switch>
-              <Route exact path="/profile/edit/">
-                <EditableProfile
-                  getUserUrl="/api/user/"
-                  sendDataUrl="/api/user/"
-                />
-              </Route>
-              <Route exact path="/profile/">
-                <Profile getUserUrl="/api/user/" />
-              </Route>
-              <Route exact path="/product/:productId">
-                <ProductPage></ProductPage>
-              </Route>
-              <Route exact path="/products/:labelId">
-                <Products />
-              </Route>
-              <Route exact path="/cart/">
-                <CartPage />
-              </Route>
-              <Route exact path="/profile/">
-                <Profile />
-              </Route>
-              <Route path="/">
-                <Main></Main>
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-        <Footer></Footer>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Router>
+        <Header></Header>
+        <div style={{ paddingTop: "70px" }}>
+          <Switch>
+            <Route exact path="/profile/edit/">
+              <EditableProfile
+                getUserUrl="/api/user/"
+                sendDataUrl="/api/user/"
+              />
+            </Route>
+            <Route exact path="/profile/">
+              <Profile getUserUrl="/api/user/" />
+            </Route>
+            <Route exact path="/product/:productId">
+              <ProductPage></ProductPage>
+            </Route>
+            <Route exact path="/products/:labelId">
+              <Products />
+            </Route>
+            <Route exact path="/cart/">
+              <CartPage />
+            </Route>
+            <Route exact path="/profile/">
+              <Profile />
+            </Route>
+            <Route path="/">
+              <Main></Main>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+      <Footer></Footer>
+    </div>
+  );
 }
 
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App2);

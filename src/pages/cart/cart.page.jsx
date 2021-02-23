@@ -29,12 +29,13 @@ const useStyle = makeStyles({
 
 function CartPage(props) {
   const classes = useStyle();
-  const savedDiscount = useSelector((state)=>(state.cart.discount));
   const dispatch = useDispatch();
+  const savedDiscount = useSelector((state)=>(state.cart.discount));
   const [totalDiscount, setTotalDiscount] = useState(0);
   const [discount, setDiscount] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [couponCode, setCouponCode] = useState('');
+
   function submitCoupon() {
     if(discount)
       {
@@ -47,8 +48,8 @@ function CartPage(props) {
       setDiscount(discount);
     });
   }
+
   useEffect(() => {
-    
     if(discount)
       dispatch(addDiscount(discount));
     else if(savedDiscount){
@@ -58,6 +59,7 @@ function CartPage(props) {
     setTotalPrice(calculateTotalPrice(props.cartItems));
     setTotalDiscount(calculateTotalDiscount(totalPrice, discount));
   }, [props.cartItems, totalPrice, discount, dispatch, savedDiscount]);
+  
   return !props.cartItems ? (
     <main></main>
   ) : (

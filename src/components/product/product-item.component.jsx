@@ -25,7 +25,7 @@ function ProductItem(props) {
             alt={props.product.title}
           />
           <div className="product-item-title">
-            <Typography variant="h5" className="yekan-text">
+            <Typography variant="h5">
               {props.product.title}
             </Typography>
           </div>

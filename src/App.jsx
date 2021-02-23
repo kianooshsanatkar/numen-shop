@@ -13,6 +13,14 @@ import Profile from "./pages/profile/profile.page";
 import EditableProfile from "./pages/profile-editable/profile-editable.page";
 import CartPage from "./pages/cart";
 import { isLoggedIn } from "./services/auth";
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core';
+
+const theme = createMuiTheme({
+  typography:{
+    fontFamily: "BYekan"
+  }
+});
 
 export default function App() {
   const dispatch = useDispatch();
@@ -25,9 +33,10 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <ThemeProvider theme={theme}>
+    <div className='' >
       <Router>
-        <Header></Header>
+        <Header />
         <div style={{ paddingTop: "70px" }}>
           <Switch>
             <Route exact path="/profile/edit/">
@@ -40,7 +49,7 @@ export default function App() {
               <Profile getUserUrl="/api/user/" />
             </Route>
             <Route exact path="/product/:productId">
-              <ProductPage></ProductPage>
+              <ProductPage />
             </Route>
             <Route exact path="/products/:labelId">
               <Products />
@@ -52,13 +61,14 @@ export default function App() {
               <Profile />
             </Route>
             <Route path="/">
-              <Main></Main>
+              <Main />
             </Route>
           </Switch>
         </div>
       </Router>
-      <Footer></Footer>
+      <Footer />
     </div>
+    </ThemeProvider>
   );
 }
 

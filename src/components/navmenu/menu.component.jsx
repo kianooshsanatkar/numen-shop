@@ -123,7 +123,7 @@ class Menu extends Component {
             style={{ backgroundColor: "#333", color: "#fff" }}
             id="form-dialog-title"
           >
-            <div style={{ margin: 0 }} className="yekan-text">
+            <div style={{ margin: 0 }} >
               ورود به حساب کاربری
             </div>
           </DialogTitle>

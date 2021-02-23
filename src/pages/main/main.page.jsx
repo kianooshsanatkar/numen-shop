@@ -16,9 +16,9 @@ class Main extends Component{
                         <img src={BgImage} alt='Numen Flame' className='main-bg-cover' />
                     </Grid>
                     <Grid item sm={4} xs={12} className='main-title'>
-                        <Typography variant='h1' className="yekan-text">نومن</Typography>
-                        <Typography variant='h4' className="yekan-text">محصولات  دست ساز</Typography>
-                        <Typography variant='body1' className="yekan-text">برای مراقبت و زیبایی پوست</Typography>
+                        <Typography variant='h1'>نومن</Typography>
+                        <Typography variant='h4'>محصولات  دست ساز</Typography>
+                        <Typography variant='body1'>برای مراقبت و زیبایی پوست</Typography>
                     </Grid>
                 </Grid>
                 <HeightSpace />

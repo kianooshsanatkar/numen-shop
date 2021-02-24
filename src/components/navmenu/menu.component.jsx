@@ -16,6 +16,7 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import "./menu.style.css";
 import MenuItem from "./menu-items.component";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { mapStateToProps, mapDispatchToProps } from "../../redux/user.reducer";
 import { login } from "../../services/auth";
 import { getLabels } from "../../services/label";
@@ -98,9 +99,11 @@ class Menu extends Component {
             <span>✋سلام {this.props.user.firstName}</span>
           ) : null}
           {this.props.user ? (
-            <IconButton color="primary">
-              <PersonRoundedIcon />
-            </IconButton>
+            <Link to="/profile/" onClick={this.props.closeMenu}>
+              <IconButton color="primary">
+                <PersonRoundedIcon />
+              </IconButton>
+            </Link>
           ) : (
             <IconButton
               color="secondary"
@@ -123,9 +126,7 @@ class Menu extends Component {
             style={{ backgroundColor: "#333", color: "#fff" }}
             id="form-dialog-title"
           >
-            <div style={{ margin: 0 }} >
-              ورود به حساب کاربری
-            </div>
+            <div style={{ margin: 0 }}>ورود به حساب کاربری</div>
           </DialogTitle>
           <DialogContent>
             {/* <DialogContentText>

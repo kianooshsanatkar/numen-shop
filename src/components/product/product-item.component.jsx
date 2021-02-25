@@ -5,10 +5,9 @@ import { IconButton, Typography } from "@material-ui/core";
 import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
 
 import {
-  mapDispatchToProps as cartDrawerDispatch,
-  mapStateToProps as cartDrawerState,
+  mapDispatchToProps as cartDrawerDispatch
 } from "../../redux/cart-drawer.reducer";
-import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart.reducer";
+import { mapDispatchToProps as cartDispatch } from "../../redux/cart.reducer";
 import NoImage from "../../resource/images/no-image-available.jpg";
 import { Link } from "react-router-dom";
 import getRelativeImageUrl, {ImageSize} from '../../helper/images';

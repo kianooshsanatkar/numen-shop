@@ -24,8 +24,9 @@ export async function login(phone, password) {
     }
 }
 
-export function logout() {
-    localStorage.removeItem('jwt');
+export const Logout = () => {
+    localStorage.removeItem('jwt_access');
+    localStorage.removeItem('jwt_refresh');
 }
 
 export function getHeaderAccAuth() {
@@ -67,6 +68,32 @@ export async function isLoggedIn() {
     return [false, null];
 }
 
-export function tokenFreshness(password) {
-
+export async function isTokenFresh() {
+    return ((await fetch(URLs.Fresh, {
+        headers: getHeaderAccAuth()
+    })).status === 200);
+}
+export async function tokenFreshness(password) {
+    const res = { ok: false, msg: '' };
+    const response = (await fetch(URLs.Fresh, {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt_access')}`,
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify({
+            password: password
+        })
+    }));
+    if (response.ok) {
+        const result = await response.json();
+        localStorage.setItem('jwt_access', result.access_token);
+        res.ok = true;
+    }
+    else if (response.status == 401) {
+        res.msg = 'پسوورد شما درست نمی باشد!';
+    }
+    else
+        res.msg = "خطایی رخ داده است!";
+    return res;
 }

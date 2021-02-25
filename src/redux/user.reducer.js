@@ -32,7 +32,7 @@ export function saveUserStateAction(user) {
         payload: user
     }
 }
-function userLogoutAction() {
+export function userLogoutAction() {
     return {
         type: userActionType.LOGOUT,
         payload: null

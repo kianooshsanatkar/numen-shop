@@ -10,21 +10,13 @@ import {
   Grid,
   Button,
 } from "@material-ui/core";
-import React,{useState, useEffect} from "react";
-import { getUser, updateUser } from "../../services/user";
-import {useSelector} from 'react-redux'
+import React, { useState } from "react";
+import { updateUser } from "../../services/user";
+import { useHistory } from "react-router-dom";
 
 export default function EditableProfile() {
+  const history = useHistory();
   const [user, setUser] = useState(null);
-  const userInStorage = useSelector((state) => state.user);
-  console.log(userInStorage);
-  
-  if (!user)
-    getUser().then((u) => setUser(u));
-
-  // useEffect(() => {
-  //   if (!user) getUser().then((u) => setUser(u));
-  // }, [user]);
 
   const userSetter = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -113,7 +105,9 @@ export default function EditableProfile() {
               size="large"
               fullWidth
               onClick={() => {
-                updateUser(user);
+                updateUser(user).then((sent) => {
+                  if (sent) history.push("/profile/");
+                });
               }}
             >
               ذخیره

@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import {
-  IconButton,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  DialogTitle,
-  TextField,
-  Button,
+  IconButton
 } from "@material-ui/core";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 
@@ -18,8 +11,8 @@ import MenuItem from "./menu-items.component";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { mapStateToProps, mapDispatchToProps } from "../../redux/user.reducer";
-import { login } from "../../services/auth";
 import { getLabels } from "../../services/label";
+import LoginDialog from "../dialog.login";
 
 class Menu extends Component {
   state = {
@@ -71,16 +64,6 @@ class Menu extends Component {
       </li>
     );
   }
-
-  logIn() {
-    login(this.state.phone, this.state.password).then((result) => {
-      const [logged, user] = result;
-      if (logged === true) {
-        this.props.login(user);
-        this.setState({ authDialog: false });
-      }
-    });
-  }
   register() {}
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -115,62 +98,12 @@ class Menu extends Component {
         </div>
         <div className="border-line"></div>
         <ul>{this.state.labels.map((label) => this.append_category(label))}</ul>
-        <Dialog
-          open={this.state.authDialog}
-          onClose={() => {
+        <LoginDialog
+          dialog={this.state.authDialog}
+          disableDialog={() => {
             this.setState({ authDialog: false });
           }}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle
-            style={{ backgroundColor: "#333", color: "#fff" }}
-            id="form-dialog-title"
-          >
-            <div style={{ margin: 0 }}>ورود به حساب کاربری</div>
-          </DialogTitle>
-          <DialogContent>
-            {/* <DialogContentText>
-                  .برای ورود لطفا ایمیل و پسوورد خود را وارد کنید، و اگر حساب کاربری ندارید لطفا از تب ایجاد حساب اقدام نمایید
-                </DialogContentText> */}
-            <form>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="phone"
-                value={this.state.phone}
-                onChange={this.handleChange.bind(this)}
-                label="phone"
-                placeholder="09121234567"
-                type="tel"
-                fullWidth
-                required
-              />
-              <TextField
-                margin="dense"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange.bind(this)}
-                label="Password"
-                type="Password"
-                fullWidth
-                required
-              />
-            </form>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => {
-                this.setState({ authDialog: false });
-              }}
-              color="primary"
-            >
-              بستن
-            </Button>
-            <Button onClick={this.logIn.bind(this)} color="primary">
-              ورود
-            </Button>
-          </DialogActions>
-        </Dialog>
+        />
       </aside>
     );
   }

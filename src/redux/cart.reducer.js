@@ -103,7 +103,6 @@ export const mapDispatchToProps = dispatch => {
 }
 
 export const mapStateToProps = state => {
-    // console.log(state);
     return {
         cartItems: state.cart.cartItems
     };

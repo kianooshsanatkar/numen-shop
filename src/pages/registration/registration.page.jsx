@@ -26,13 +26,12 @@ function Register(props) {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [city, setCity] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [zip_code, setZipCode] = useState("");
   const [address, setAddress] = useState("");
   const [err, setErr] = useState(true);
   const [checkErrors, setCheckErrors] = useState(false);
   const [snack, setSnack] = useState(false);
   const [succeed, setSucceed] = useState(false);
-  const [user, setUser] = useState(null);
 
   if (succeed) {
     login(phone.slice(1), password).then((result) => {
@@ -40,8 +39,6 @@ function Register(props) {
       history.push('/');
     });
   }
-//   dispatch(saveUserStateAction(user));
-//   if (user != null) history.push("/");
 
   const submit = () => {
     setErr(true);
@@ -59,7 +56,7 @@ function Register(props) {
         password: password,
         address: address,
         city: city,
-        zip_code: zipCode,
+        zip_code: zip_code,
       }).then((response) => {
         console.log(response.ok);
         if (response.ok) {
@@ -176,10 +173,10 @@ function Register(props) {
             <Grid item xs={6}>
               <TextField
                 error={
-                  checkErrors && zipCode.length !== 0 && zipCode.length !== 10
+                  checkErrors && zip_code.length !== 0 && zip_code.length !== 10
                 }
                 fullWidth
-                value={zipCode}
+                value={zip_code}
                 onChange={(e) => {
                   setZipCode(e.target.value);
                 }}

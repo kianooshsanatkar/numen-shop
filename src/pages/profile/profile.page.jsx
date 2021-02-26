@@ -13,26 +13,46 @@ import { getUser } from "../../services/user";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Logout } from "../../services/auth";
 import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../../redux/user.reducer";
 import { useHistory } from "react-router-dom";
 
+import { userLogoutAction } from "../../redux/user.reducer";
 import { isTokenFresh } from "../../services/auth";
 import FreshDialog from "../../components/dialog.token-freshness/";
+import { Logout } from "../../services/auth";
+import {getAddress} from '../../services/address';
 
 export default function Profile() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [user, setUser] = useState(null);
+  const [address, setAddress] = useState({
+    city: "",
+    zip_code: "",
+    postal_address: "",
+  });
   const [authDialog, setAuthDialog] = useState(false);
+  const [fetch, setFetch] = useState(false);
   const userInStorage = useSelector((state) => state.user);
   useEffect(() => {
-    if (!user) getUser().then((u) => setUser(u));
-  }, [user]);
-
-  // if (!user)
-  //   getUser().then((u) => setUser(u));
+    if (!fetch) {
+      setFetch(true);
+      getUser().then((u) => {
+        if (u)
+          setUser({
+            ...user,
+            ...u,
+          });
+      });
+      getAddress().then((ad) => {
+        if (ad)
+          setAddress({
+            ...address,
+            ...ad,
+          });
+      });
+    }
+  }, [user, address, fetch]);
   if (!userInStorage) {
     return <Redirect to="/" />;
   }
@@ -72,7 +92,7 @@ export default function Profile() {
                 </TableCell>
                 <TableCell align="right">{user.email}</TableCell>
               </TableRow>
-              {!user.addresses
+              {/* {!user.addresses
                 ? null
                 : user.addresses.map((address) => (
                     <TableRow key={address.uid}>
@@ -86,8 +106,20 @@ export default function Profile() {
                         <Radio />
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ))} */}
               <TableRow>
+                <TableCell align="right"><h3>شهر :</h3></TableCell>
+                <TableCell align="right">{address.city}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align="right"><h3>کد پستی :</h3></TableCell>
+                <TableCell align="right">{address.zip_code}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell align="right"><h3>آدرس :</h3></TableCell>
+                <TableCell align="right">{address.postal_address}</TableCell>
+              </TableRow>
+                <TableRow>
                 <TableCell colSpan={2}>
                   <Button
                     variant="contained"

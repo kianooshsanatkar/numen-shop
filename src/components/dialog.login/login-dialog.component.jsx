@@ -10,9 +10,9 @@ import { useState } from "react";
 import { login } from "../../services/auth";
 import {useDispatch} from 'react-redux';
 import { saveUserStateAction }  from '../../redux/user.reducer';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-export default function LoginDialog({ dialog, disableDialog }) {
+export default function LoginDialog({ dialog, disableDialog, closeMenu }) {
     const dispatch = useDispatch();
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
@@ -63,7 +63,7 @@ export default function LoginDialog({ dialog, disableDialog }) {
       </DialogContent>
       <DialogActions>
         <Link to="/registration/">
-        <Button variant="text" color="secondary">
+        <Button variant="text" color="secondary" onClick={()=>{disableDialog(); closeMenu();}}>
           ثبت نام
         </Button>
         </Link>

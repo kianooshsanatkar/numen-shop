@@ -103,6 +103,7 @@ class Menu extends Component {
           disableDialog={() => {
             this.setState({ authDialog: false });
           }}
+          closeMenu={this.props.closeMenu}
         />
       </aside>
     );

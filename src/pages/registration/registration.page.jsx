@@ -12,14 +12,12 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { emailValidation, phoneValidation } from "../../helper/validation";
 import { createUser } from "../../services/user";
-import { useDispatch } from "react-redux";
 import { mapDispatchToProps } from "../../redux/user.reducer";
 import { useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { connect } from 'react-redux';
 
 function Register(props) {
-  const dispatch = useDispatch;
   const history = useHistory();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

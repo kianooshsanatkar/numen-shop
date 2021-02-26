@@ -13,11 +13,12 @@ import React, { useState } from "react";
 import { emailValidation, phoneValidation } from "../../helper/validation";
 import { createUser } from "../../services/user";
 import { useDispatch } from "react-redux";
-import { saveUserStateAction } from "../../redux/user.reducer";
+import { mapDispatchToProps } from "../../redux/user.reducer";
 import { useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
+import { connect } from 'react-redux';
 
-export default function Register() {
+function Register(props) {
   const dispatch = useDispatch;
   const history = useHistory();
   const [firstName, setFirstName] = useState("");
@@ -35,11 +36,12 @@ export default function Register() {
   const [succeed, setSucceed] = useState(false);
   const [user, setUser] = useState(null);
 
-//   if (succeed && user === null) {
-//     login(phone.slice(1), password).then((result) => {
-//       setUser(result[1]);
-//     });
-//   }
+  if (succeed) {
+    login(phone.slice(1), password).then((result) => {
+      props.login(result[1]);
+      history.push('/');
+    });
+  }
 //   dispatch(saveUserStateAction(user));
 //   if (user != null) history.push("/");
 
@@ -277,3 +279,5 @@ export default function Register() {
     </Container>
   );
 }
+
+export default connect(null, mapDispatchToProps)(Register);

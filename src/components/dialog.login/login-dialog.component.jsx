@@ -10,10 +10,10 @@ import { useState } from "react";
 import { login } from "../../services/auth";
 import {useDispatch} from 'react-redux';
 import { saveUserStateAction }  from '../../redux/user.reducer';
+import { Link } from 'react-router-dom'
 
 export default function LoginDialog({ dialog, disableDialog }) {
     const dispatch = useDispatch();
-    // const [authDialog, setAuthDialog] = useState(dialog);
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
 
@@ -32,9 +32,6 @@ export default function LoginDialog({ dialog, disableDialog }) {
         <div style={{ margin: 0 }}>ورود به حساب کاربری</div>
       </DialogTitle>
       <DialogContent>
-        {/* <DialogContentText>
-                  .برای ورود لطفا ایمیل و پسوورد خود را وارد کنید، و اگر حساب کاربری ندارید لطفا از تب ایجاد حساب اقدام نمایید
-                </DialogContentText> */}
         <form>
           <TextField
             autoFocus
@@ -65,11 +62,16 @@ export default function LoginDialog({ dialog, disableDialog }) {
         </form>
       </DialogContent>
       <DialogActions>
+        <Link to="/registration/">
+        <Button variant="text" color="secondary">
+          ثبت نام
+        </Button>
+        </Link>
         <Button
           onClick={() => {
             disableDialog();
           }}
-          color="primary"
+          color="default"
         >
           بستن
         </Button>

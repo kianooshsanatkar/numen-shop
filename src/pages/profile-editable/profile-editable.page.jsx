@@ -32,9 +32,6 @@ export default function EditableProfile() {
   });
   const [fetch, setFetch] = useState(false);
 
-  const userInStorage = useSelector((state) => state.user);
-  console.log(userInStorage);
-
   useEffect(() => {
     if (!fetch) {
       setFetch(true);

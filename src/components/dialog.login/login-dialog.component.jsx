@@ -12,7 +12,7 @@ import {useDispatch} from 'react-redux';
 import { saveUserStateAction }  from '../../redux/user.reducer';
 import { Link } from 'react-router-dom';
 
-export default function LoginDialog({ dialog, disableDialog, closeMenu }) {
+export default function LoginDialog({ dialog, disableDialog, closeMenu=()=>{} }) {
     const dispatch = useDispatch();
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");

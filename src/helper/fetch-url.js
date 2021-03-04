@@ -20,6 +20,7 @@ const URLs = {
     Products: prefix + "/api/label/products/",
     Cart: prefix + "/api/cart/",
     Discount: prefix + '/api/discount/',
+    Invoice: prefix + '/api/invoice/'
 }
 
 export default URLs;

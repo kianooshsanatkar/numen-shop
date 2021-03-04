@@ -2,10 +2,24 @@ import URLs from '../helper/fetch-url';
 import { getHeaderAccAuth } from "./auth";
 
 export async function getAddress() {
-    return (await (await fetch(URLs.Address, {
+    const response = (await fetch(URLs.Address, {
         headers: getHeaderAccAuth(),
-    })).json())[0];
+    }));
+    if (response.ok)
+    {
+        const result = await response.json();
+        if(result && result.length > 0)
+            return result[0]
+    }
+    return null;
 };
+/* 
+Address{
+    city = marsh
+    zip_code = marsh
+    postal_address = marsh
+}
+*/
 
 export async function updateAddress(address) {
     if (address.uid) {
@@ -19,7 +33,7 @@ export async function updateAddress(address) {
         });
         return response.ok;
     }
-    else{
+    else {
         const response = await fetch(URLs.Address, {
             method: 'POST',
             headers: {

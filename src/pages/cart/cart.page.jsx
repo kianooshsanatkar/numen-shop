@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { mapStateToProps, mapDispatchToProps } from "../../redux/cart.reducer";
-import { addDiscount } from "../../redux/cart.reducer";
+import { addDiscount, deleteAll } from "../../redux/cart.reducer";
 
 import {
   getDiscount,
@@ -66,7 +66,7 @@ function CartPage(props) {
   const [loginDialog, setLoginDialog] = useState(false);
   const [address, setAddress] = useState(null);
   const [approveAddress, setApproveAddress] = useState(false);
-  const [err, setErr] = useState({ show: false, content: '', title: '' });
+  const [err, setErr] = useState({ show: false, content: "", title: "" });
 
   useEffect(() => {
     getAddress().then((add) => {
@@ -131,7 +131,10 @@ function CartPage(props) {
       saveCartItems(items).then((ok) => {
         if (ok)
           createInvoice().then((ok) => {
-            if (ok) history.push("/invoice/");
+            if (ok) {
+              history.push("/bill/");
+              dispatch(deleteAll());
+            }
           });
       });
     } else {

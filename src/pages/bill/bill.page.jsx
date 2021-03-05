@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
-import { Container, Grid, Paper } from "@material-ui/core";
-import PaymentIcon from "@material-ui/icons/Payment";
-import MarkunreadMailboxIcon from "@material-ui/icons/MarkunreadMailbox";
-import OpenInNewIcon from "@material-ui/icons/OpenInNew";
+import { Container, Typography } from "@material-ui/core";
 
 import { getInvoices } from "../../services";
 
@@ -22,10 +17,12 @@ export default function BillPage() {
 
   return (
     <main>
-      <Container fixed style={{ direction: "rtl" }}>
+      <Container fixed style={{ direction: "rtl", paddingTop:'1em' }}>
         <div>
-          {invoices === null
-            ? null
+          {invoices === null || invoices.length < 1
+            ? <div>
+              <Typography variant="h4">شما هیچ خرید ثبت شده ایی ندارید!</Typography>
+              </div>
             : invoices.map((invoice) => {
                 return (
                   <InvoiceItem

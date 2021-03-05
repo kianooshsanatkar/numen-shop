@@ -16,6 +16,8 @@ import { isLoggedIn } from "./services/auth";
 import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/core';
 import Register from "./pages/registration/registration.page";
+import BillPage from './pages/bill/bill.page';
+import InvoicePage from './pages/invoice/invoice.page';
 
 const theme = createMuiTheme({
   typography:{
@@ -60,6 +62,12 @@ export default function App() {
             </Route>
             <Route exact path="/cart/">
               <CartPage />
+            </Route>
+            <Route exact path="/bill/">
+              <BillPage />
+            </Route>
+            <Route exact path="/invoice/:invoiceId">
+              <InvoicePage />
             </Route>
             <Route exact path="/profile/">
               <Profile />

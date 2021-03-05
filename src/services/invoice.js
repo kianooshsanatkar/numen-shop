@@ -14,3 +14,9 @@ export async function getInvoices() {
         headers: getHeaderAccAuth()
     })).json()
 }
+export async function getInvoice(invoiceId) {
+    return await (await fetch(URLs.Invoice + invoiceId, {
+        method: 'GET',
+        headers: getHeaderAccAuth()
+    })).json()
+}

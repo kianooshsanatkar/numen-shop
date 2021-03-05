@@ -7,3 +7,10 @@ export async function createInvoice() {
         headers: getHeaderAccAuth()
     })).ok
 }
+
+export async function getInvoices() {
+    return await (await fetch(URLs.Invoices, {
+        method: 'GET',
+        headers: getHeaderAccAuth()
+    })).json()
+}

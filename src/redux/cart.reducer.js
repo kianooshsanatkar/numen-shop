@@ -16,7 +16,8 @@ export const cartActions = {
     ADD_CART_ITEM: "ADD_CART_ITEM",
     REMOVE_CART_ITEM: "REMOVE_CART_ITEM", // if product exist reduce the quantity by 1
     DELETE_CART_ITEM: "DELETE_CART_ITEM",
-    DISCOUNT: "DISCOUNT"
+    DISCOUNT: "DISCOUNT",
+    DELETE_ALL: "DELETE_ALL"
 }
 
 export function addDiscount(discount) {
@@ -37,6 +38,13 @@ export function deleteProductAction(uid) {
     return {
         type: cartActions.DELETE_CART_ITEM,
         payload: uid
+    }
+}
+
+export function deleteAll(){
+    return{
+        type: cartActions.DELETE_ALL,
+        payload: null
     }
 }
 
@@ -96,6 +104,13 @@ export default function cartReducer(currentState = INITIAL_STATE, action) {
                 }
             }
             return currentState;
+        }
+        case cartActions.DELETE_ALL:{
+            return{
+                ...currentState,
+                cartItems: [],
+                discount: null
+            }
         }
         default:
             return currentState;

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import {
-  IconButton
-} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
@@ -97,7 +95,14 @@ class Menu extends Component {
           )}
         </div>
         <div className="border-line"></div>
-        <ul>{this.state.labels.map((label) => this.append_category(label))}</ul>
+        <ul>
+          {this.state.labels.map((label) => this.append_category(label))}
+          {!this.props.user ? null : (
+            <li>
+              <Link to="/bill/">خرید ها</Link>
+            </li>
+          )}
+        </ul>
         <LoginDialog
           dialog={this.state.authDialog}
           disableDialog={() => {

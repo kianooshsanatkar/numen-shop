@@ -78,7 +78,7 @@ export async function tokenFreshness(password) {
     const response = (await fetch(URLs.Fresh, {
         method: "PUT",
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('jwt_access')}`,
+            ...getHeaderAccAuth(),
             'Content-Type': 'Application/json'
         },
         body: JSON.stringify({

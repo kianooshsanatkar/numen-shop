@@ -25,19 +25,20 @@ export async function login(phone, password) {
 }
 
 export const Logout = () => {
-    localStorage.removeItem('jwt_access');
-    localStorage.removeItem('jwt_refresh');
+    // localStorage.removeItem('jwt_access');
+    // localStorage.removeItem('jwt_refresh');
+    fetch('/auth/logout')
 }
 
 export function getHeaderAccAuth() {
     return {
-        Authorization: `Bearer ${localStorage.getItem('jwt_access')}`,
+        // Authorization: `Bearer ${localStorage.getItem('jwt_access')}`,
     }
 }
 
 export function getHeaderRefAuth() {
     return {
-        Authorization: `Bearer ${localStorage.getItem('jwt_refresh')}`,
+        // Authorization: `Bearer ${localStorage.getItem('jwt_refresh')}`,
     }
 }
 
@@ -78,7 +79,7 @@ export async function tokenFreshness(password) {
     const response = (await fetch(URLs.Fresh, {
         method: "PUT",
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('jwt_access')}`,
+            ...getHeaderAccAuth(),
             'Content-Type': 'Application/json'
         },
         body: JSON.stringify({

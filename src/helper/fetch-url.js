@@ -1,5 +1,5 @@
 // Todo: set { prefix = '' } for production
-const prefix = "http://localhost";
+const prefix = "";
 
 const URLs = {
     // Authentication and Authorization

@@ -22,8 +22,8 @@ export async function updateUser(user) {
     const response = await fetch(URLs.User, {
         method: "PATCH",
         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem('jwt_access')}`
+            ...getHeaderAccAuth(),
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(user)
     })

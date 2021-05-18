@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { updateUser, getUser } from "../../services/user";
 import { getAddress, updateAddress } from "../../services/address";
@@ -194,13 +193,10 @@ export default function EditableProfile() {
               fullWidth
               onClick={() => {
                 updateUser(user).then((userSucceed) => {
-                  if (userSucceed) 
-                  updateAddress(address).then((addressSucceed)=>{
-                    if(addressSucceed)
-                    history.push("/profile/");
-                  }
-                  
-                  )
+                  if (userSucceed)
+                    updateAddress(address).then((addressSucceed) => {
+                      if (addressSucceed) history.push("/profile/");
+                    });
                 });
               }}
             >

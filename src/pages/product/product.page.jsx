@@ -18,30 +18,36 @@ import NoImage from "../../resource/images/no-image-available.jpg";
 import HeightSpace from "../../components/space/space.component";
 import "./product.style.css";
 import { connect } from "react-redux";
-import {getProduct} from '../../services/product';
+import { getProduct } from "../../services/product";
 
 import {
   mapDispatchToProps as cartDrawerDispatch,
   mapStateToProps as cartDrawerState,
 } from "../../redux/cart-drawer.reducer";
-import { mapStateToProps as cartState, mapDispatchToProps as cartDispatch } from "../../redux/cart.reducer";
-import {LandScape, SmallImage } from '../../components/image';
+import {
+  mapStateToProps as cartState,
+  mapDispatchToProps as cartDispatch,
+} from "../../redux/cart.reducer";
+import { LandScape, SmallImage } from "../../components/image";
 
 class ProductPage extends Component {
   state = {
     product: null,
     images: [],
-    selectedImage: NoImage,
+    selectedImage: '',
   };
   componentDidMount() {
     let productId = this.props.match.params.productId;
     getProduct(productId).then((data) => {
-        this.setState({
-          product: data,
-          images: data.images.split(","),
-          selectedImage: data.images.split(",")[0],
-        });
+      this.setState({
+        product: data,
+        images: data.images_file,
+        selectedImage:
+          data.images_file && data.images_file.length > 0
+            ? data.images_file[0]
+            : '',
       });
+    });
   }
 
   getImagePath(fileName, size = "small") {
@@ -73,7 +79,7 @@ class ProductPage extends Component {
         {!this.state.product ? null : (
           <Container fixed>
             <Grid container spacing={2}>
-              <Grid item sm={6} xs={12} >
+              <Grid item sm={6} xs={12}>
                 <Grid container className="product-images-container">
                   <Hidden smUp>
                     <Grid item xs={12}>
@@ -81,19 +87,23 @@ class ProductPage extends Component {
                     </Grid>
                   </Hidden>
                   <Grid item xs={12}>
-                    <LandScape className="product-images"
+                    <LandScape
+                      className="product-images"
                       src={this.state.selectedImage}
-                      alt={this.state.product.title} />
+                      alt={this.state.product.title}
+                    />
                   </Grid>
                   <Grid item container xs={12} spacing={2}>
                     {this.state.images.map((image) => (
                       <Grid key={image} item xs={4} md={3}>
-                        <SmallImage className="product-images"
+                        <SmallImage
+                          className="product-images"
                           onClick={() =>
                             this.setState({ selectedImage: image })
                           }
                           src={image}
-                          alt={this.state.product.title} />
+                          alt={this.state.product.title}
+                        />
                         {/* <img
                           className="product-images"
                           onClick={() =>
@@ -172,16 +182,15 @@ class ProductPage extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return { ...cartDrawerState(state), ...cartState(state) };
 }
 
-function mapDispatchToProps(dispatch){
-  return{
+function mapDispatchToProps(dispatch) {
+  return {
     ...cartDrawerDispatch(dispatch),
-    ...cartDispatch(dispatch)
-  }
+    ...cartDispatch(dispatch),
+  };
 }
 
 export default connect(

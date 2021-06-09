@@ -14,7 +14,7 @@ import getRelativeImageUrl, {ImageSize} from '../../helper/images';
 
 
 function ProductItem(props) {
-  let images = props.product.images ? props.product.images.split(",") : null;
+  let images = props.product.images_file;
   return (
     <Grid item xs={6} sm={4} md={3}>
       <Link to={"/product/" + props.product.uid}>

@@ -10,7 +10,7 @@ export const ImageSize = {
 const prefix="http://localhost"
 
 export default function getRelativeImageUrl(imageName, imageSize) {
-    if (imageName === null || imageName === undefined || imageName === "")
+    if (imageName === null || imageName === undefined || imageName === "" || imageName===[])
     return NoImage;
     const path = prefix + "/static/images/";
     return path + imageName + "_" + imageSize + ".jpg";
